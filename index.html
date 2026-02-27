@@ -3,1023 +3,2067 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Connixis - Advanced Network Engineering Simulator">
-    <meta name="theme-color" content="#3b82f6">
-    <title>Connixis</title>
-    
-    <!-- Icon Libraries -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+    <meta name="description" content="Connixis - Advanced Network Engineering Simulator. Design, simulate, and master complex network topologies.">
+    <meta name="theme-color" content="#6366f1">
+    <title>Connixis | Network Engineering Simulator</title>
     
     <!-- Favicon -->
     <link rel="shortcut icon" href="Logo.png" type="image/x-icon">
     
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           CSS VARIABLES - LIGHT MODE
+        ============================================ */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #a855f7;
+            --accent-cyan: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-rose: #f43f5e;
+            --accent-amber: #f59e0b;
+            
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #6366f1 100%);
+            --gradient-mesh: radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+                            radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.06) 0px, transparent 50%),
+                            radial-gradient(at 0% 50%, rgba(6, 182, 212, 0.06) 0px, transparent 50%),
+                            radial-gradient(at 80% 50%, rgba(168, 85, 247, 0.05) 0px, transparent 50%),
+                            radial-gradient(at 0% 100%, rgba(99, 102, 241, 0.08) 0px, transparent 50%);
+            
+            --border-color: #e2e8f0;
+            --border-light: #f1f5f9;
+            --border-glow: rgba(99, 102, 241, 0.3);
+            
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.15);
+            --shadow-card: 0 4px 40px rgba(0, 0, 0, 0.06);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-2xl: 32px;
+            --radius-full: 9999px;
+            
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================
+           RESET & BASE
+        ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Hide Scrollbar */
+        html {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* ============================================
+           CUSTOM CURSOR
+        ============================================ */
+        .cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+        }
+
+        .cursor-ring {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(99, 102, 241, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+        }
+
+        .cursor-dot.hover {
+            transform: translate(-50%, -50%) scale(2.5);
+            background: var(--accent-secondary);
+        }
+
+        .cursor-ring.hover {
+            width: 70px;
+            height: 70px;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .cursor-ring.click {
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        /* ============================================
+           SELECTION
+        ============================================ */
+        ::selection {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        /* ============================================
+           LINKS & BUTTONS BASE
+        ============================================ */
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: none;
+        }
+
+        button {
+            cursor: none;
+            font-family: inherit;
+        }
+
+        /* ============================================
+           BACKGROUND EFFECTS
+        ============================================ */
+        .bg-mesh {
+            position: fixed;
+            inset: 0;
+            background: var(--gradient-mesh);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-dots {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(99, 102, 241, 0.15) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(99, 102, 241, 0.12);
+            top: -200px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(139, 92, 246, 0.1);
+            bottom: -150px;
+            left: -100px;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: rgba(6, 182, 212, 0.08);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -14s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 30px) scale(1.02); }
+        }
+
+        /* ============================================
+           NAVIGATION
+        ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all var(--transition-normal);
+        }
+
+        .nav.scrolled {
+            padding: 16px 60px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-logo-img {
+            height: 44px;
+            width: auto;
+            transition: transform var(--transition-normal);
+        }
+
+        .nav-logo:hover .nav-logo-img {
+            transform: scale(1.05);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-radius: var(--radius-full);
+            transition: all var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .nav-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: var(--radius-full);
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+            transition: all var(--transition-normal);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .nav-btn svg {
+            width: 18px;
+            height: 18px;
+            transition: transform var(--transition-normal);
+        }
+
+        .nav-btn:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* ============================================
+           HERO SECTION
+        ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 140px 40px 100px;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-logo {
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-logo img {
+            height: 80px;
+            width: auto;
+            filter: drop-shadow(0 10px 30px rgba(99, 102, 241, 0.2));
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px 10px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            box-shadow: var(--shadow-md);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-badge-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .hero-badge-icon svg {
+            width: 16px;
+            height: 16px;
+            color: white;
+        }
+
+        .hero-badge-text {
+            font-weight: 600;
+        }
+
+        .hero-badge-version {
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -3px;
+            margin-bottom: 28px;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .hero-title-line {
+            display: block;
+        }
+
+        .hero-title-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 50px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .btn {
+            padding: 18px 36px;
+            border-radius: var(--radius-full);
+            font-size: 1.05rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn svg {
+            width: 22px;
+            height: 22px;
+            transition: transform var(--transition-normal);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.35);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.45);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(5px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            background: rgba(99, 102, 241, 0.05);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ============================================
+           TOOL SHOWCASE
+        ============================================ */
+        .showcase {
+            width: 100%;
+            max-width: 1300px;
+            margin: 80px auto 0;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .showcase-frame {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-2xl), var(--shadow-glow);
+            position: relative;
+        }
+
+        .showcase-frame::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-2xl);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .showcase-frame:hover::before {
+            opacity: 0.2;
+        }
+
+        .showcase-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .showcase-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .showcase-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            transition: transform var(--transition-fast);
+        }
+
+        .showcase-dot:hover {
+            transform: scale(1.2);
+        }
+
+        .showcase-dot.red { background: #ff5f57; }
+        .showcase-dot.yellow { background: #ffbd2e; }
+        .showcase-dot.green { background: #28c840; }
+
+        .showcase-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .showcase-title svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent-primary);
+        }
+
+        .showcase-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .showcase-action {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            transition: all var(--transition-fast);
+        }
+
+        .showcase-action:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .showcase-action svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .showcase-content {
+            position: relative;
+            height: 550px;
+            background: var(--bg-secondary);
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar Preview */
+        .preview-sidebar {
+            width: 220px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            flex-shrink: 0;
+        }
+
+        .preview-sidebar-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-sidebar-title svg {
+            width: 14px;
+            height: 14px;
+            color: var(--accent-primary);
+        }
+
+        .preview-devices {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .preview-device {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px 8px;
+            text-align: center;
+            transition: all var(--transition-fast);
+        }
+
+        .preview-device:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .preview-device-icon {
+            width: 36px;
+            height: 36px;
+            margin: 0 auto 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-device-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-primary);
+        }
+
+        .preview-device-icon.green { background: rgba(16, 185, 129, 0.1); }
+        .preview-device-icon.green svg { color: var(--accent-emerald); }
+
+        .preview-device-icon.cyan { background: rgba(6, 182, 212, 0.1); }
+        .preview-device-icon.cyan svg { color: var(--accent-cyan); }
+
+        .preview-device-icon.rose { background: rgba(244, 63, 94, 0.1); }
+        .preview-device-icon.rose svg { color: var(--accent-rose); }
+
+        .preview-device-name {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* Canvas Preview */
+        .preview-canvas {
+            flex: 1;
+            position: relative;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+                linear-gradient(rgba(99, 102, 241, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 25px 25px, 25px 25px;
+        }
+
+        /* Network Nodes */
+        .canvas-node {
+            position: absolute;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-normal);
+            animation: nodeAppear 0.5s ease-out both;
+        }
+
+        .canvas-node:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        @keyframes nodeAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .canvas-node-icon {
+            width: 44px;
+            height: 44px;
+            margin: 0 auto 10px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .canvas-node-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .canvas-node-icon.primary { background: rgba(99, 102, 241, 0.1); }
+        .canvas-node-icon.primary svg { color: var(--accent-primary); }
+
+        .canvas-node-icon.green { background: rgba(16, 185, 129, 0.1); }
+        .canvas-node-icon.green svg { color: var(--accent-emerald); }
+
+        .canvas-node-icon.cyan { background: rgba(6, 182, 212, 0.1); }
+        .canvas-node-icon.cyan svg { color: var(--accent-cyan); }
+
+        .canvas-node-icon.rose { background: rgba(244, 63, 94, 0.1); }
+        .canvas-node-icon.rose svg { color: var(--accent-rose); }
+
+        .canvas-node-icon.amber { background: rgba(245, 158, 11, 0.1); }
+        .canvas-node-icon.amber svg { color: var(--accent-amber); }
+
+        .canvas-node-icon.violet { background: rgba(139, 92, 246, 0.1); }
+        .canvas-node-icon.violet svg { color: var(--accent-secondary); }
+
+        .canvas-node-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .canvas-node-ip {
+            font-size: 0.65rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-primary);
+        }
+
+        .canvas-node-status {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-emerald);
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        /* Network Positions */
+        .node-router { top: 45%; left: 45%; animation-delay: 0.1s; }
+        .node-switch { top: 20%; left: 25%; animation-delay: 0.2s; }
+        .node-server { top: 20%; right: 20%; animation-delay: 0.3s; }
+        .node-pc1 { bottom: 15%; left: 20%; animation-delay: 0.4s; }
+        .node-pc2 { bottom: 15%; right: 15%; animation-delay: 0.5s; }
+        .node-firewall { top: 45%; left: 15%; animation-delay: 0.6s; }
+
+        /* Connection Lines */
+        .canvas-lines {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .canvas-lines svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .connection-line {
+            stroke: var(--accent-primary);
+            stroke-width: 2.5;
+            stroke-dasharray: 8 4;
+            opacity: 0.4;
+            animation: lineDash 1.5s linear infinite;
+        }
+
+        @keyframes lineDash {
+            to { stroke-dashoffset: -24; }
+        }
+
+        /* Data Packets */
+        .data-packet {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-cyan);
+            z-index: 10;
+            opacity: 0;
+            animation: packetTravel 4s ease-in-out infinite;
+        }
+
+        .data-packet:nth-child(2) {
+            animation-delay: 1.3s;
+            background: var(--accent-emerald);
+            box-shadow: 0 0 20px var(--accent-emerald);
+        }
+
+        .data-packet:nth-child(3) {
+            animation-delay: 2.6s;
+            background: var(--accent-primary);
+            box-shadow: 0 0 20px var(--accent-primary);
+        }
+
+        @keyframes packetTravel {
+            0% { top: 50%; left: 48%; opacity: 0; }
+            10% { opacity: 1; }
+            30% { top: 25%; left: 30%; }
+            50% { top: 25%; left: 75%; opacity: 1; }
+            70% { top: 75%; left: 75%; }
+            90% { opacity: 1; }
+            100% { top: 50%; left: 48%; opacity: 0; }
+        }
+
+        /* Right Panel Preview */
+        .preview-panel {
+            width: 280px;
+            background: var(--bg-card);
+            border-left: 1px solid var(--border-color);
+            padding: 20px;
+            flex-shrink: 0;
+        }
+
+        .preview-panel-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .preview-panel-header svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-primary);
+        }
+
+        .preview-panel-header span {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .preview-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+            background: var(--bg-secondary);
+            padding: 4px;
+            border-radius: var(--radius-md);
+        }
+
+        .preview-tab {
+            flex: 1;
+            padding: 8px 4px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-align: center;
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            transition: all var(--transition-fast);
+        }
+
+        .preview-tab.active {
+            background: var(--bg-card);
+            color: var(--accent-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .preview-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .preview-stat {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            text-align: center;
+        }
+
+        .preview-stat-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .preview-stat-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .preview-config {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 14px;
+        }
+
+        .preview-config-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .preview-config-title svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .preview-config-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .preview-config-row:last-child {
+            border-bottom: none;
+        }
+
+        .preview-config-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .preview-config-value {
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           FEATURES SECTION
+        ============================================ */
+        .features {
+            padding: 120px 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .features-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            padding: 40px 36px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(99, 102, 241, 0.2);
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
+        }
+
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Feature Icon Variants */
+        .feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.25);
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25);
+        }
+
+        .feature-card:nth-child(4) .feature-icon {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.25);
+        }
+
+        .feature-card:nth-child(5) .feature-icon {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.25);
+        }
+
+        .feature-card:nth-child(6) .feature-icon {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.25);
+        }
+
+        /* ============================================
+           DEVICE SHOWCASE
+        ============================================ */
+        .devices-section {
+            padding: 100px 40px;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .devices-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .devices-marquee-container {
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .devices-marquee {
+            display: flex;
+            gap: 24px;
+            animation: marqueeScroll 35s linear infinite;
+        }
+
+        .devices-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .device-tag {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .device-tag:hover {
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .device-tag svg {
+            width: 26px;
+            height: 26px;
+            color: var(--accent-primary);
+        }
+
+        .device-tag span {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           CTA SECTION
+        ============================================ */
+        .cta {
+            padding: 100px 40px 120px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-2xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(99, 102, 241, 0.25);
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .cta-btn {
+            padding: 20px 48px;
+            background: white;
+            color: var(--accent-primary);
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all var(--transition-normal);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn svg {
+            width: 24px;
+            height: 24px;
+            transition: transform var(--transition-normal);
+        }
+
+        .cta-btn:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* ============================================
+           DEVELOPER CREDIT
+        ============================================ */
+        .developer-credit {
+            padding: 50px 40px 60px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .developer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+
+        .developer-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .developer-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .developer-link:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .developer-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* ============================================
+           ANIMATIONS
+        ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+        ============================================ */
+        @media (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .preview-sidebar,
+            .preview-panel {
+                display: none;
+            }
+
+            .showcase-content {
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .nav {
+                padding: 16px 24px;
+            }
+
+            .nav.scrolled {
+                padding: 12px 24px;
+            }
+
+            .nav-link {
+                display: none;
+            }
+
+            .hero {
+                padding: 120px 24px 80px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+                letter-spacing: -1.5px;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .showcase {
+                margin: 60px auto 0;
+            }
+
+            .showcase-content {
+                height: 380px;
+            }
+
+            .features {
+                padding: 80px 24px;
+            }
+
+            .cta-card {
+                padding: 60px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-logo img {
+                height: 60px;
+            }
+
+            .showcase-content {
+                height: 320px;
+            }
+
+            .canvas-node {
+                transform: scale(0.85);
+            }
+
+            .developer-links {
+                flex-direction: column;
+            }
+
+            .developer-link {
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* Hide custom cursor on mobile */
+            .cursor {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            a, button {
+                cursor: pointer;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-btn span {
+                display: none;
+            }
+
+            .nav-btn {
+                padding: 12px 16px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 8px 14px 8px 8px;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .feature-card {
+                padding: 30px 24px;
+            }
+
+            .showcase-header {
+                padding: 14px 16px;
+            }
+
+            .showcase-title {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Mobile Sidebar Toggle -->
-        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
-            <i class="ri-menu-line"></i>
-        </button>
-        
-        <!-- Sidebar Overlay -->
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- Custom Cursor -->
+    <div class="cursor cursor-dot" id="cursorDot"></div>
+    <div class="cursor cursor-ring" id="cursorRing"></div>
 
-        <!-- Left Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-brand">
-                    <div class="sidebar-logo">
-                        <img src="Logo.png" alt="Connixis Logo">
-                    </div>
-                </div>
+    <!-- Background Effects -->
+    <div class="bg-mesh"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-dots"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">
+            <img src="Logo.png" alt="Connixis Logo" class="nav-logo-img">
+        </a>
+
+        <div class="nav-actions">
+            <a href="https://github.com/ompandey07" target="_blank" class="nav-link">
+                <i data-lucide="github"></i>
+                <span>GitHub</span>
+            </a>
+            <a href="tool.html" class="nav-btn">
+                <span>Launch Simulator</span>
+                <i data-lucide="arrow-right"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="Logo.png" alt="Connixis">
             </div>
 
-            <div class="sidebar-content">
-                <!-- End Devices -->
-                <div class="device-category">
-                    <div class="category-header" onclick="toggleCategory(this)">
-                        <i class="ri-computer-line"></i>
-                        <span>End Devices</span>
-                        <i class="ri-arrow-down-s-line chevron"></i>
-                    </div>
-                    <div class="device-grid">
-                        <div class="device-item" draggable="true" data-type="pc">
-                            <div class="device-icon endpoint"><i class="ri-computer-fill"></i></div>
-                            <div class="device-name">Desktop</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="laptop">
-                            <div class="device-icon endpoint"><i class="ri-macbook-fill"></i></div>
-                            <div class="device-name">Laptop</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="server">
-                            <div class="device-icon endpoint"><i class="ri-server-fill"></i></div>
-                            <div class="device-name">Server</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="workstation">
-                            <div class="device-icon endpoint"><i class="ri-computer-fill"></i></div>
-                            <div class="device-name">Workstation</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="mobile">
-                            <div class="device-icon wireless"><i class="ri-smartphone-fill"></i></div>
-                            <div class="device-name">Mobile</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="tablet">
-                            <div class="device-icon wireless"><i class="ri-tablet-fill"></i></div>
-                            <div class="device-name">Tablet</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="printer">
-                            <div class="device-icon endpoint"><i class="ri-printer-fill"></i></div>
-                            <div class="device-name">Printer</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="ip-phone">
-                            <div class="device-icon endpoint"><i class="ri-phone-fill"></i></div>
-                            <div class="device-name">IP Phone</div>
-                        </div>
-                    </div>
+            <div class="hero-badge">
+                <div class="hero-badge-icon">
+                    <i data-lucide="sparkles"></i>
                 </div>
-
-                <!-- Network Devices -->
-                <div class="device-category">
-                    <div class="category-header" onclick="toggleCategory(this)">
-                        <i class="ri-router-line"></i>
-                        <span>Network Devices</span>
-                        <i class="ri-arrow-down-s-line chevron"></i>
-                    </div>
-                    <div class="device-grid">
-                        <div class="device-item" draggable="true" data-type="router">
-                            <div class="device-icon network"><i class="ri-router-fill"></i></div>
-                            <div class="device-name">Router</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="switch">
-                            <div class="device-icon network"><i class="ri-git-branch-fill"></i></div>
-                            <div class="device-name">Switch L2</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="l3switch">
-                            <div class="device-icon network"><i class="ri-git-merge-fill"></i></div>
-                            <div class="device-name">Switch L3</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="hub">
-                            <div class="device-icon network"><i class="ri-share-circle-fill"></i></div>
-                            <div class="device-name">Hub</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="bridge">
-                            <div class="device-icon network"><i class="ri-arrow-left-right-fill"></i></div>
-                            <div class="device-name">Bridge</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="repeater">
-                            <div class="device-icon network"><i class="ri-repeat-fill"></i></div>
-                            <div class="device-name">Repeater</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="modem">
-                            <div class="device-icon network"><i class="ri-base-station-fill"></i></div>
-                            <div class="device-name">Modem</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="gateway">
-                            <div class="device-icon network"><i class="ri-door-open-fill"></i></div>
-                            <div class="device-name">Gateway</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Wireless Devices -->
-                <div class="device-category">
-                    <div class="category-header" onclick="toggleCategory(this)">
-                        <i class="ri-wifi-line"></i>
-                        <span>Wireless</span>
-                        <i class="ri-arrow-down-s-line chevron"></i>
-                    </div>
-                    <div class="device-grid">
-                        <div class="device-item" draggable="true" data-type="accesspoint">
-                            <div class="device-icon wireless"><i class="ri-wireless-charging-fill"></i></div>
-                            <div class="device-name">Access Point</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="wlc">
-                            <div class="device-icon wireless"><i class="ri-radar-fill"></i></div>
-                            <div class="device-name">WLC</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="mesh">
-                            <div class="device-icon wireless"><i class="ri-bubble-chart-fill"></i></div>
-                            <div class="device-name">Mesh Node</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="antenna">
-                            <div class="device-icon wireless"><i class="ri-signal-tower-fill"></i></div>
-                            <div class="device-name">Antenna</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Security Devices -->
-                <div class="device-category">
-                    <div class="category-header" onclick="toggleCategory(this)">
-                        <i class="ri-shield-check-line"></i>
-                        <span>Security</span>
-                        <i class="ri-arrow-down-s-line chevron"></i>
-                    </div>
-                    <div class="device-grid">
-                        <div class="device-item" draggable="true" data-type="firewall">
-                            <div class="device-icon security"><i class="ri-fire-fill"></i></div>
-                            <div class="device-name">Firewall</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="ngfw">
-                            <div class="device-icon security"><i class="ri-shield-flash-fill"></i></div>
-                            <div class="device-name">NGFW</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="ids">
-                            <div class="device-icon security"><i class="ri-search-eye-fill"></i></div>
-                            <div class="device-name">IDS/IPS</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="vpn">
-                            <div class="device-icon security"><i class="ri-lock-2-fill"></i></div>
-                            <div class="device-name">VPN</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="waf">
-                            <div class="device-icon security"><i class="ri-shield-star-fill"></i></div>
-                            <div class="device-name">WAF</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="proxy">
-                            <div class="device-icon security"><i class="ri-filter-3-fill"></i></div>
-                            <div class="device-name">Proxy</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cloud & WAN -->
-                <div class="device-category">
-                    <div class="category-header" onclick="toggleCategory(this)">
-                        <i class="ri-cloud-line"></i>
-                        <span>Cloud & WAN</span>
-                        <i class="ri-arrow-down-s-line chevron"></i>
-                    </div>
-                    <div class="device-grid">
-                        <div class="device-item" draggable="true" data-type="cloud">
-                            <div class="device-icon cloud"><i class="ri-cloud-fill"></i></div>
-                            <div class="device-name">Cloud</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="internet">
-                            <div class="device-icon cloud"><i class="ri-earth-fill"></i></div>
-                            <div class="device-name">Internet</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="datacenter">
-                            <div class="device-icon cloud"><i class="ri-database-2-fill"></i></div>
-                            <div class="device-name">Data Center</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="loadbalancer">
-                            <div class="device-icon cloud"><i class="ri-scales-3-fill"></i></div>
-                            <div class="device-name">Load Balancer</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="dns">
-                            <div class="device-icon cloud"><i class="ri-global-fill"></i></div>
-                            <div class="device-name">DNS Server</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="dhcp">
-                            <div class="device-icon cloud"><i class="ri-settings-4-fill"></i></div>
-                            <div class="device-name">DHCP Server</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- IoT Devices -->
-                <div class="device-category">
-                    <div class="category-header" onclick="toggleCategory(this)">
-                        <i class="ri-sensor-line"></i>
-                        <span>IoT & Sensors</span>
-                        <i class="ri-arrow-down-s-line chevron"></i>
-                    </div>
-                    <div class="device-grid">
-                        <div class="device-item" draggable="true" data-type="iot-sensor">
-                            <div class="device-icon wireless"><i class="ri-sensor-fill"></i></div>
-                            <div class="device-name">IoT Sensor</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="camera">
-                            <div class="device-icon wireless"><i class="ri-camera-fill"></i></div>
-                            <div class="device-name">IP Camera</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="smartdevice">
-                            <div class="device-icon wireless"><i class="ri-home-wifi-fill"></i></div>
-                            <div class="device-name">Smart Device</div>
-                        </div>
-                        <div class="device-item" draggable="true" data-type="plc">
-                            <div class="device-icon network"><i class="ri-cpu-fill"></i></div>
-                            <div class="device-name">PLC</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Canvas Area -->
-        <main class="main-area">
-            <!-- Toolbar -->
-            <div class="toolbar">
-                <div class="toolbar-group">
-                    <button class="tool-btn active" id="selectTool" title="Select Tool (V)">
-                        <i class="ri-cursor-fill"></i>
-                        <span>Select</span>
-                    </button>
-                    <button class="tool-btn" id="connectTool" title="Connect Tool (C)">
-                        <i class="ri-link"></i>
-                        <span>Connect</span>
-                    </button>
-                    <button class="tool-btn icon-only" id="noteTool" title="Add Note (N)">
-                        <i class="ri-sticky-note-fill"></i>
-                        <span>Note</span>
-                    </button>
-                </div>
-
-                <div class="toolbar-group">
-                    <select class="tool-select" id="cableType" title="Cable Type">
-                        <option value="ethernet">Ethernet (Cat6)</option>
-                        <option value="fiber">Fiber Optic</option>
-                        <option value="crossover">Crossover</option>
-                        <option value="serial">Serial DCE/DTE</option>
-                        <option value="console">Console</option>
-                        <option value="wireless">Wireless Link</option>
-                    </select>
-                </div>
-
-                <div class="toolbar-group">
-                    <button class="tool-btn" id="pingTool" title="Ping Test">
-                        <i class="ri-radar-fill"></i>
-                        <span>Ping</span>
-                    </button>
-                    <button class="tool-btn" id="tracerouteTool" title="Traceroute">
-                        <i class="ri-route-fill"></i>
-                        <span>Trace</span>
-                    </button>
-                    <button class="tool-btn icon-only" id="packetCapture" title="Packet Capture">
-                        <i class="ri-file-search-fill"></i>
-                        <span>Capture</span>
-                    </button>
-                </div>
-
-                <div class="toolbar-group">
-                    <button class="tool-btn" id="subnetCalc" title="Subnet Calculator">
-                        <i class="ri-calculator-fill"></i>
-                        <span>Subnet</span>
-                    </button>
-                    <button class="tool-btn icon-only" id="macLookup" title="MAC Lookup">
-                        <i class="ri-search-2-fill"></i>
-                        <span>MAC</span>
-                    </button>
-                </div>
-
-                <div class="toolbar-group">
-                    <button class="tool-btn icon-only" id="zoomIn" title="Zoom In">
-                        <i class="ri-zoom-in-fill"></i>
-                    </button>
-                    <button class="tool-btn icon-only" id="zoomOut" title="Zoom Out">
-                        <i class="ri-zoom-out-fill"></i>
-                    </button>
-                    <button class="tool-btn icon-only" id="fitView" title="Fit to View">
-                        <i class="ri-fullscreen-fill"></i>
-                    </button>
-                </div>
-
-                <div class="toolbar-group" style="margin-left: auto;">
-                    <button class="tool-btn success" id="runSimulation" title="Run Simulation">
-                        <i class="ri-play-fill"></i>
-                        <span>Run</span>
-                    </button>
-                    <button class="tool-btn icon-only" id="saveTopology" title="Save Topology">
-                        <i class="ri-save-3-fill"></i>
-                    </button>
-                    <button class="tool-btn icon-only" id="loadTopology" title="Load Topology">
-                        <i class="ri-folder-open-fill"></i>
-                    </button>
-                    <button class="tool-btn icon-only" id="exportImage" title="Export as Image">
-                        <i class="ri-image-fill"></i>
-                    </button>
-                    <button class="tool-btn danger icon-only" id="clearAll" title="Clear All">
-                        <i class="ri-delete-bin-fill"></i>
-                    </button>
-                </div>
+                <span class="hero-badge-text">Network Engineering Simulator</span>
+                <span class="hero-badge-version">v3.0</span>
             </div>
 
-            <!-- Canvas -->
-            <div class="canvas-container" id="canvasContainer">
-                <div class="canvas-grid"></div>
-                <svg id="networkCanvas" xmlns="http://www.w3.org/2000/svg"></svg>
+            <h1 class="hero-title">
+                <span class="hero-title-line">Design & Simulate</span>
+                <span class="hero-title-line hero-title-gradient">Network Topologies</span>
+            </h1>
+
+            <p class="hero-description">
+                Build professional network diagrams with drag-and-drop simplicity. 
+                Configure devices, simulate packet flow, and master networking concepts 
+                — all in your browser.
+            </p>
+
+            <div class="hero-actions">
+                <a href="tool.html" class="btn btn-primary">
+                    Start Building Now
+                    <i data-lucide="arrow-right"></i>
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i data-lucide="layers"></i>
+                    Explore Features
+                </a>
             </div>
+        </div>
 
-            <!-- Status Bar -->
-            <div class="status-bar">
-                <div class="status-item success">
-                    <i class="ri-checkbox-circle-fill"></i>
-                    <span>Ready</span>
-                </div>
-                <div class="status-item">
-                    <i class="ri-computer-line"></i>
-                    <span>Devices: <strong id="deviceCount">0</strong></span>
-                </div>
-                <div class="status-item">
-                    <i class="ri-link"></i>
-                    <span>Links: <strong id="connectionCount">0</strong></span>
-                </div>
-                <div class="status-item">
-                    <i class="ri-send-plane-fill"></i>
-                    <span>Packets: <strong id="packetCount">0</strong></span>
-                </div>
-                <div class="status-item" style="margin-left: auto;">
-                    <i class="ri-time-line"></i>
-                    <span id="currentTime">00:00:00</span>
-                </div>
-                <div class="status-item">
-                    <span>Zoom: <strong id="zoomLevel">100%</strong></span>
-                </div>
-            </div>
-        </main>
-
-        <!-- Mobile Panel Toggle -->
-        <button class="panel-toggle" id="panelToggle" aria-label="Toggle Panel">
-            <i class="ri-settings-3-fill"></i>
-        </button>
-
-        <!-- Right Panel -->
-        <aside class="right-panel" id="rightPanel">
-            <div class="panel-header">
-                <i class="ri-dashboard-3-fill"></i>
-                <h2>Properties</h2>
-            </div>
-
-            <div class="panel-tabs">
-                <div class="panel-tab active" data-tab="config">
-                    <i class="ri-settings-3-fill"></i>
-                    Config
-                </div>
-                <div class="panel-tab" data-tab="routing">
-                    <i class="ri-route-fill"></i>
-                    Routing
-                </div>
-                <div class="panel-tab" data-tab="vlan">
-                    <i class="ri-price-tag-3-fill"></i>
-                    VLAN
-                </div>
-                <div class="panel-tab" data-tab="acl">
-                    <i class="ri-shield-keyhole-fill"></i>
-                    ACL
-                </div>
-                <div class="panel-tab" data-tab="cli">
-                    <i class="ri-terminal-box-fill"></i>
-                    CLI
-                </div>
-            </div>
-
-            <div class="panel-content">
-                <!-- Config Panel -->
-                <div class="panel-section active" id="configPanel">
-                    <!-- Stats -->
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-icon" style="background: var(--accent-primary-light); color: var(--accent-primary);">
-                                <i class="ri-computer-fill"></i>
-                            </div>
-                            <div class="stat-value" id="totalDevices">0</div>
-                            <div class="stat-label">Devices</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon" style="background: var(--accent-green-light); color: var(--accent-green);">
-                                <i class="ri-link"></i>
-                            </div>
-                            <div class="stat-value" id="totalLinks">0</div>
-                            <div class="stat-label">Connections</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon" style="background: var(--accent-orange-light); color: var(--accent-orange);">
-                                <i class="ri-send-plane-2-fill"></i>
-                            </div>
-                            <div class="stat-value" id="activePackets">0</div>
-                            <div class="stat-label">Packets</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon" style="background: var(--accent-purple-light); color: var(--accent-purple);">
-                                <i class="ri-heart-pulse-fill"></i>
-                            </div>
-                            <div class="stat-value" id="networkHealth">100%</div>
-                            <div class="stat-label">Health</div>
-                        </div>
+        <!-- Tool Showcase -->
+        <div class="showcase">
+            <div class="showcase-frame">
+                <div class="showcase-header">
+                    <div class="showcase-dots">
+                        <div class="showcase-dot red"></div>
+                        <div class="showcase-dot yellow"></div>
+                        <div class="showcase-dot green"></div>
                     </div>
-
-                    <!-- Device Config -->
-                    <div class="config-group" id="deviceConfigGroup" style="display: none;">
-                        <div class="config-group-header">
-                            <i class="ri-settings-4-fill"></i>
-                            <h4>Device Configuration</h4>
-                        </div>
-
-                        <div class="config-row">
-                            <label>Hostname</label>
-                            <input type="text" id="deviceName" placeholder="Device name">
-                        </div>
-                        <div class="config-row">
-                            <label>IP Address</label>
-                            <input type="text" id="deviceIP" placeholder="192.168.1.1">
-                        </div>
-                        <div class="config-row">
-                            <label>Subnet</label>
-                            <input type="text" id="deviceSubnet" placeholder="255.255.255.0">
-                        </div>
-                        <div class="config-row">
-                            <label>Gateway</label>
-                            <input type="text" id="deviceGateway" placeholder="192.168.1.1">
-                        </div>
-                        <div class="config-row">
-                            <label>DNS</label>
-                            <input type="text" id="deviceDNS" placeholder="8.8.8.8">
-                        </div>
-                        <div class="config-row">
-                            <label>MAC</label>
-                            <input type="text" id="deviceMAC" readonly>
-                        </div>
-                        <div class="config-row">
-                            <label>VLAN</label>
-                            <select id="deviceVLAN">
-                                <option value="1">VLAN 1 - Default</option>
-                                <option value="10">VLAN 10 - Mgmt</option>
-                                <option value="20">VLAN 20 - Users</option>
-                                <option value="30">VLAN 30 - Servers</option>
-                                <option value="100">VLAN 100 - Guest</option>
-                            </select>
-                        </div>
-
-                        <button class="btn btn-primary" id="applyConfig">
-                            <i class="ri-check-fill"></i>
-                            Apply
+                    <div class="showcase-title">
+                        <i data-lucide="network"></i>
+                        Connixis Network Simulator
+                    </div>
+                    <div class="showcase-actions">
+                        <button class="showcase-action">
+                            <i data-lucide="minus"></i>
                         </button>
-                        <button class="btn btn-danger" id="deleteDevice">
-                            <i class="ri-delete-bin-fill"></i>
-                            Delete
+                        <button class="showcase-action">
+                            <i data-lucide="square"></i>
                         </button>
-                    </div>
-
-                    <!-- Interfaces -->
-                    <div class="config-group" id="interfaceConfig" style="display: none;">
-                        <div class="config-group-header">
-                            <i class="ri-ethernet-fill"></i>
-                            <h4>Interfaces</h4>
-                        </div>
-                        <div id="interfaceList"></div>
-                    </div>
-
-                    <!-- Empty State -->
-                    <div class="empty-state" id="emptyState">
-                        <i class="ri-cursor-fill"></i>
-                        <p>Select a device to configure</p>
-                    </div>
-                </div>
-
-                <!-- Routing Panel -->
-                <div class="panel-section" id="routingPanel">
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-road-map-fill"></i>
-                            <h4>Routing Table</h4>
-                        </div>
-                        <div id="routingTableContainer">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Network</th>
-                                        <th>Mask</th>
-                                        <th>Next Hop</th>
-                                        <th>IF</th>
-                                        <th>AD</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="routingTableBody">
-                                    <tr>
-                                        <td colspan="5" style="text-align: center; color: var(--text-muted);">
-                                            Select a router
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-add-circle-fill"></i>
-                            <h4>Add Static Route</h4>
-                        </div>
-                        <div class="config-row">
-                            <label>Network</label>
-                            <input type="text" id="routeNetwork" placeholder="10.0.0.0">
-                        </div>
-                        <div class="config-row">
-                            <label>Mask</label>
-                            <input type="text" id="routeMask" placeholder="255.255.255.0">
-                        </div>
-                        <div class="config-row">
-                            <label>Next Hop</label>
-                            <input type="text" id="routeNextHop" placeholder="192.168.1.1">
-                        </div>
-                        <div class="config-row">
-                            <label>Interface</label>
-                            <select id="routeInterface">
-                                <option value="Gi0/0">Gi0/0</option>
-                                <option value="Gi0/1">Gi0/1</option>
-                                <option value="Gi0/2">Gi0/2</option>
-                                <option value="Gi0/3">Gi0/3</option>
-                            </select>
-                        </div>
-                        <div class="config-row">
-                            <label>Metric</label>
-                            <input type="number" id="routeMetric" value="1" min="1" max="255">
-                        </div>
-                        <button class="btn btn-primary" id="addRoute">
-                            <i class="ri-add-fill"></i>
-                            Add Route
-                        </button>
-                    </div>
-
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-settings-2-fill"></i>
-                            <h4>Routing Protocol</h4>
-                        </div>
-                        <div class="config-row">
-                            <label>Protocol</label>
-                            <select id="routingProtocol">
-                                <option value="static">Static</option>
-                                <option value="rip">RIPv2</option>
-                                <option value="ospf">OSPF</option>
-                                <option value="eigrp">EIGRP</option>
-                                <option value="bgp">BGP</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-success" id="enableRouting">
-                            <i class="ri-play-fill"></i>
-                            Enable
+                        <button class="showcase-action">
+                            <i data-lucide="x"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- VLAN Panel -->
-                <div class="panel-section" id="vlanPanel">
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-price-tag-3-fill"></i>
-                            <h4>VLAN Database</h4>
+                <div class="showcase-content">
+                    <!-- Sidebar Preview -->
+                    <div class="preview-sidebar">
+                        <div class="preview-sidebar-title">
+                            <i data-lucide="cpu"></i>
+                            Devices
                         </div>
-                        <div id="vlanList">
-                            <div class="vlan-entry">
-                                <div class="vlan-color" style="background: var(--accent-primary);"></div>
-                                <div class="vlan-info">
-                                    <div class="vlan-name">Default</div>
-                                    <div class="vlan-id">VLAN 1</div>
+                        <div class="preview-devices">
+                            <div class="preview-device">
+                                <div class="preview-device-icon green">
+                                    <i data-lucide="router"></i>
                                 </div>
-                                <span class="vlan-ports">All</span>
+                                <div class="preview-device-name">Router</div>
                             </div>
-                            <div class="vlan-entry">
-                                <div class="vlan-color" style="background: var(--accent-green);"></div>
-                                <div class="vlan-info">
-                                    <div class="vlan-name">Management</div>
-                                    <div class="vlan-id">VLAN 10</div>
+                            <div class="preview-device">
+                                <div class="preview-device-icon">
+                                    <i data-lucide="git-branch"></i>
                                 </div>
-                                <span class="vlan-ports">Fa0/1-4</span>
+                                <div class="preview-device-name">Switch</div>
                             </div>
-                            <div class="vlan-entry">
-                                <div class="vlan-color" style="background: var(--accent-orange);"></div>
-                                <div class="vlan-info">
-                                    <div class="vlan-name">Users</div>
-                                    <div class="vlan-id">VLAN 20</div>
+                            <div class="preview-device">
+                                <div class="preview-device-icon cyan">
+                                    <i data-lucide="server"></i>
                                 </div>
-                                <span class="vlan-ports">Fa0/5-12</span>
+                                <div class="preview-device-name">Server</div>
                             </div>
-                            <div class="vlan-entry">
-                                <div class="vlan-color" style="background: var(--accent-red);"></div>
-                                <div class="vlan-info">
-                                    <div class="vlan-name">Servers</div>
-                                    <div class="vlan-id">VLAN 30</div>
+                            <div class="preview-device">
+                                <div class="preview-device-icon rose">
+                                    <i data-lucide="shield"></i>
                                 </div>
-                                <span class="vlan-ports">Fa0/13-16</span>
+                                <div class="preview-device-name">Firewall</div>
                             </div>
-                            <div class="vlan-entry">
-                                <div class="vlan-color" style="background: var(--accent-purple);"></div>
-                                <div class="vlan-info">
-                                    <div class="vlan-name">Guest</div>
-                                    <div class="vlan-id">VLAN 100</div>
+                            <div class="preview-device">
+                                <div class="preview-device-icon">
+                                    <i data-lucide="monitor"></i>
                                 </div>
-                                <span class="vlan-ports">Fa0/17-24</span>
+                                <div class="preview-device-name">Desktop</div>
+                            </div>
+                            <div class="preview-device">
+                                <div class="preview-device-icon cyan">
+                                    <i data-lucide="laptop"></i>
+                                </div>
+                                <div class="preview-device-name">Laptop</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-add-circle-fill"></i>
-                            <h4>Create VLAN</h4>
+                    <!-- Canvas Preview -->
+                    <div class="preview-canvas">
+                        <!-- Connection Lines -->
+                        <div class="canvas-lines">
+                            <svg viewBox="0 0 800 550">
+                                <line class="connection-line" x1="400" y1="275" x2="200" y2="130"/>
+                                <line class="connection-line" x1="400" y1="275" x2="620" y2="130"/>
+                                <line class="connection-line" x1="400" y1="275" x2="160" y2="420"/>
+                                <line class="connection-line" x1="400" y1="275" x2="660" y2="420"/>
+                                <line class="connection-line" x1="400" y1="275" x2="130" y2="275"/>
+                            </svg>
                         </div>
-                        <div class="config-row">
-                            <label>VLAN ID</label>
-                            <input type="number" id="newVlanId" min="2" max="4094" placeholder="2-4094">
-                        </div>
-                        <div class="config-row">
-                            <label>Name</label>
-                            <input type="text" id="newVlanName" placeholder="VLAN name">
-                        </div>
-                        <button class="btn btn-primary" id="createVlan">
-                            <i class="ri-add-fill"></i>
-                            Create
-                        </button>
-                    </div>
 
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-ethernet-fill"></i>
-                            <h4>Port Config</h4>
-                        </div>
-                        <div class="config-row">
-                            <label>Mode</label>
-                            <select id="portMode">
-                                <option value="access">Access</option>
-                                <option value="trunk">Trunk</option>
-                            </select>
-                        </div>
-                        <div class="config-row">
-                            <label>Access</label>
-                            <input type="number" id="accessVlan" value="1" min="1">
-                        </div>
-                        <div class="config-row">
-                            <label>Native</label>
-                            <input type="number" id="nativeVlan" value="1" min="1">
-                        </div>
-                    </div>
-                </div>
+                        <!-- Data Packets -->
+                        <div class="data-packet"></div>
+                        <div class="data-packet"></div>
+                        <div class="data-packet"></div>
 
-                <!-- ACL Panel -->
-                <div class="panel-section" id="aclPanel">
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-shield-keyhole-fill"></i>
-                            <h4>Access Control Lists</h4>
+                        <!-- Network Nodes -->
+                        <div class="canvas-node node-router">
+                            <div class="canvas-node-status"></div>
+                            <div class="canvas-node-icon green">
+                                <i data-lucide="router"></i>
+                            </div>
+                            <div class="canvas-node-name">Router-1</div>
+                            <div class="canvas-node-ip">10.0.0.1</div>
                         </div>
-                        <div id="firewallRules">
-                            <div class="firewall-rule">
-                                <span class="rule-number">10</span>
-                                <span class="rule-action allow">PERMIT</span>
-                                <span class="rule-protocol">TCP</span>
-                                <span class="rule-details">any → 80,443</span>
-                                <i class="ri-delete-bin-line rule-delete"></i>
+
+                        <div class="canvas-node node-switch">
+                            <div class="canvas-node-status"></div>
+                            <div class="canvas-node-icon primary">
+                                <i data-lucide="git-branch"></i>
                             </div>
-                            <div class="firewall-rule">
-                                <span class="rule-number">20</span>
-                                <span class="rule-action allow">PERMIT</span>
-                                <span class="rule-protocol">ICMP</span>
-                                <span class="rule-details">any → any</span>
-                                <i class="ri-delete-bin-line rule-delete"></i>
+                            <div class="canvas-node-name">Switch-1</div>
+                            <div class="canvas-node-ip">192.168.1.2</div>
+                        </div>
+
+                        <div class="canvas-node node-server">
+                            <div class="canvas-node-status"></div>
+                            <div class="canvas-node-icon cyan">
+                                <i data-lucide="server"></i>
                             </div>
-                            <div class="firewall-rule">
-                                <span class="rule-number">30</span>
-                                <span class="rule-action allow">PERMIT</span>
-                                <span class="rule-protocol">UDP</span>
-                                <span class="rule-details">any → 53</span>
-                                <i class="ri-delete-bin-line rule-delete"></i>
+                            <div class="canvas-node-name">Server-1</div>
+                            <div class="canvas-node-ip">10.0.1.10</div>
+                        </div>
+
+                        <div class="canvas-node node-pc1">
+                            <div class="canvas-node-status"></div>
+                            <div class="canvas-node-icon violet">
+                                <i data-lucide="monitor"></i>
                             </div>
-                            <div class="firewall-rule">
-                                <span class="rule-number">40</span>
-                                <span class="rule-action deny">DENY</span>
-                                <span class="rule-protocol">TCP</span>
-                                <span class="rule-details">any → 23</span>
-                                <i class="ri-delete-bin-line rule-delete"></i>
+                            <div class="canvas-node-name">PC-1</div>
+                            <div class="canvas-node-ip">192.168.1.100</div>
+                        </div>
+
+                        <div class="canvas-node node-pc2">
+                            <div class="canvas-node-status"></div>
+                            <div class="canvas-node-icon amber">
+                                <i data-lucide="laptop"></i>
                             </div>
-                            <div class="firewall-rule">
-                                <span class="rule-number">100</span>
-                                <span class="rule-action deny">DENY</span>
-                                <span class="rule-protocol">IP</span>
-                                <span class="rule-details">any → any</span>
-                                <i class="ri-delete-bin-line rule-delete"></i>
+                            <div class="canvas-node-name">Laptop-1</div>
+                            <div class="canvas-node-ip">192.168.1.101</div>
+                        </div>
+
+                        <div class="canvas-node node-firewall">
+                            <div class="canvas-node-status"></div>
+                            <div class="canvas-node-icon rose">
+                                <i data-lucide="shield"></i>
                             </div>
+                            <div class="canvas-node-name">Firewall</div>
+                            <div class="canvas-node-ip">10.0.0.254</div>
                         </div>
                     </div>
 
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-add-circle-fill"></i>
-                            <h4>Add ACL Rule</h4>
+                    <!-- Right Panel Preview -->
+                    <div class="preview-panel">
+                        <div class="preview-panel-header">
+                            <i data-lucide="settings"></i>
+                            <span>Properties</span>
                         </div>
-                        <div class="config-row">
-                            <label>Seq</label>
-                            <input type="number" id="ruleSequence" value="50" min="1">
-                        </div>
-                        <div class="config-row">
-                            <label>Action</label>
-                            <select id="ruleAction">
-                                <option value="permit">Permit</option>
-                                <option value="deny">Deny</option>
-                            </select>
-                        </div>
-                        <div class="config-row">
-                            <label>Protocol</label>
-                            <select id="ruleProtocol">
-                                <option value="ip">IP</option>
-                                <option value="tcp">TCP</option>
-                                <option value="udp">UDP</option>
-                                <option value="icmp">ICMP</option>
-                            </select>
-                        </div>
-                        <div class="config-row">
-                            <label>Source</label>
-                            <input type="text" id="ruleSource" placeholder="any">
-                        </div>
-                        <div class="config-row">
-                            <label>Dest</label>
-                            <input type="text" id="ruleDest" placeholder="any">
-                        </div>
-                        <div class="config-row">
-                            <label>Port</label>
-                            <input type="text" id="rulePort" placeholder="80">
-                        </div>
-                        <button class="btn btn-primary" id="addAclRule">
-                            <i class="ri-add-fill"></i>
-                            Add Rule
-                        </button>
-                    </div>
 
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-exchange-fill"></i>
-                            <h4>NAT Config</h4>
+                        <div class="preview-tabs">
+                            <div class="preview-tab active">Config</div>
+                            <div class="preview-tab">Routes</div>
+                            <div class="preview-tab">CLI</div>
                         </div>
-                        <div class="config-row">
-                            <label>Type</label>
-                            <select id="natType">
-                                <option value="none">Disabled</option>
-                                <option value="static">Static</option>
-                                <option value="dynamic">Dynamic</option>
-                                <option value="pat">PAT</option>
-                            </select>
-                        </div>
-                        <div class="config-row">
-                            <label>Inside</label>
-                            <input type="text" id="natInside" placeholder="192.168.1.0/24">
-                        </div>
-                        <div class="config-row">
-                            <label>Outside</label>
-                            <input type="text" id="natOutside" placeholder="203.0.113.1">
-                        </div>
-                        <button class="btn btn-success" id="configureNat">
-                            <i class="ri-check-fill"></i>
-                            Apply
-                        </button>
-                    </div>
-                </div>
 
-                <!-- CLI Panel -->
-                <div class="panel-section" id="cliPanel">
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-terminal-box-fill"></i>
-                            <h4>Command Line</h4>
-                        </div>
-                        <div class="terminal">
-                            <div class="terminal-header">
-                                <div class="terminal-dot red"></div>
-                                <div class="terminal-dot yellow"></div>
-                                <div class="terminal-dot green"></div>
-                                <span class="terminal-title">Connixis CLI</span>
+                        <div class="preview-stats">
+                            <div class="preview-stat">
+                                <div class="preview-stat-value">6</div>
+                                <div class="preview-stat-label">Devices</div>
                             </div>
-                            <div class="terminal-body" id="terminalOutput">
-                                <div class="terminal-line info">╔════════════════════════════════════╗</div>
-                                <div class="terminal-line info">║   Connixis CLI v3.0                ║</div>
-                                <div class="terminal-line info">║   Network Engineering Simulator    ║</div>
-                                <div class="terminal-line info">╚════════════════════════════════════╝</div>
-                                <div class="terminal-line"></div>
-                                <div class="terminal-line output">Type 'help' for commands</div>
+                            <div class="preview-stat">
+                                <div class="preview-stat-value">5</div>
+                                <div class="preview-stat-label">Links</div>
                             </div>
-                            <div class="terminal-input-wrapper">
-                                <span class="terminal-prompt">$</span>
-                                <input type="text" class="terminal-input" id="terminalInput" placeholder="Enter command..." autocomplete="off" spellcheck="false">
+                            <div class="preview-stat">
+                                <div class="preview-stat-value">3</div>
+                                <div class="preview-stat-label">Packets</div>
+                            </div>
+                            <div class="preview-stat">
+                                <div class="preview-stat-value">100%</div>
+                                <div class="preview-stat-label">Health</div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="config-group">
-                        <div class="config-group-header">
-                            <i class="ri-flashlight-fill"></i>
-                            <h4>Quick Commands</h4>
-                        </div>
-                        <div class="quick-commands">
-                            <button class="quick-cmd" onclick="executeCommand('show ip route')">show ip route</button>
-                            <button class="quick-cmd" onclick="executeCommand('show interfaces')">show interfaces</button>
-                            <button class="quick-cmd" onclick="executeCommand('show arp')">show arp</button>
-                            <button class="quick-cmd" onclick="executeCommand('show vlan brief')">show vlan</button>
-                            <button class="quick-cmd" onclick="executeCommand('show run')">show run</button>
-                            <button class="quick-cmd" onclick="executeCommand('show ip int brief')">show ip int</button>
-                            <button class="quick-cmd" onclick="executeCommand('show mac address-table')">show mac</button>
-                            <button class="quick-cmd" onclick="executeCommand('show cdp neighbors')">show cdp</button>
+                        <div class="preview-config">
+                            <div class="preview-config-title">
+                                <i data-lucide="settings-2"></i>
+                                Router-1 Config
+                            </div>
+                            <div class="preview-config-row">
+                                <span class="preview-config-label">Hostname</span>
+                                <span class="preview-config-value">Router-1</span>
+                            </div>
+                            <div class="preview-config-row">
+                                <span class="preview-config-label">IP Address</span>
+                                <span class="preview-config-value">10.0.0.1</span>
+                            </div>
+                            <div class="preview-config-row">
+                                <span class="preview-config-label">Subnet</span>
+                                <span class="preview-config-value">255.255.255.0</span>
+                            </div>
+                            <div class="preview-config-row">
+                                <span class="preview-config-label">Status</span>
+                                <span class="preview-config-value" style="color: var(--accent-emerald);">Online</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </aside>
-    </div>
+        </div>
+    </section>
 
-    <!-- Context Menu -->
-    <div class="context-menu" id="contextMenu">
-        <div class="context-menu-item" data-action="configure">
-            <i class="ri-settings-3-fill"></i>
-            Configure
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-header animate-on-scroll">
+            <div class="section-badge">
+                <i data-lucide="zap"></i>
+                Features
+            </div>
+            <h2 class="section-title">Powerful Tools for Network Engineers</h2>
+            <p class="section-description">
+                Everything you need to design, configure, and simulate professional network infrastructures.
+            </p>
         </div>
-        <div class="context-menu-item" data-action="console">
-            <i class="ri-terminal-box-fill"></i>
-            Console
-        </div>
-        <div class="context-menu-separator"></div>
-        <div class="context-menu-item" data-action="ping">
-            <i class="ri-radar-fill"></i>
-            Ping
-        </div>
-        <div class="context-menu-item" data-action="traceroute">
-            <i class="ri-route-fill"></i>
-            Traceroute
-        </div>
-        <div class="context-menu-item" data-action="capture">
-            <i class="ri-file-search-fill"></i>
-            Capture
-        </div>
-        <div class="context-menu-separator"></div>
-        <div class="context-menu-item" data-action="enable">
-            <i class="ri-checkbox-circle-fill"></i>
-            Enable
-        </div>
-        <div class="context-menu-item" data-action="disable">
-            <i class="ri-close-circle-fill"></i>
-            Disable
-        </div>
-        <div class="context-menu-separator"></div>
-        <div class="context-menu-item" data-action="duplicate">
-            <i class="ri-file-copy-fill"></i>
-            Duplicate
-        </div>
-        <div class="context-menu-item danger" data-action="delete">
-            <i class="ri-delete-bin-fill"></i>
-            Delete
-        </div>
-    </div>
 
-    <!-- Subnet Calculator Modal -->
-    <div class="modal" id="subnetModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="ri-calculator-fill"></i> Subnet Calculator</h3>
-                <button class="modal-close" onclick="closeModal('subnetModal')">
-                    <i class="ri-close-line"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="config-row">
-                    <label>IP Address</label>
-                    <input type="text" id="subnetIP" placeholder="192.168.1.0">
+        <div class="features-grid">
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i data-lucide="mouse-pointer-click"></i>
                 </div>
-                <div class="config-row">
-                    <label>CIDR/Mask</label>
-                    <input type="text" id="subnetCIDR" placeholder="/24">
-                </div>
-                <button class="btn btn-primary" onclick="calculateSubnet()">
-                    <i class="ri-calculator-fill"></i>
-                    Calculate
-                </button>
-                
-                <div class="subnet-results" id="subnetResults" style="display: none;"></div>
+                <h3 class="feature-title">Drag & Drop Builder</h3>
+                <p class="feature-description">
+                    Intuitive visual interface with 50+ device types. Simply drag devices and 
+                    connect them with multiple cable types.
+                </p>
             </div>
-        </div>
-    </div>
 
-    <!-- Ping Modal -->
-    <div class="modal" id="pingModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="ri-radar-fill"></i> Ping Test</h3>
-                <button class="modal-close" onclick="closeModal('pingModal')">
-                    <i class="ri-close-line"></i>
-                </button>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i data-lucide="terminal"></i>
+                </div>
+                <h3 class="feature-title">Cisco-like CLI</h3>
+                <p class="feature-description">
+                    Practice with realistic command line interface. Execute show commands, 
+                    configure routing, VLANs, and ACLs.
+                </p>
             </div>
-            <div class="modal-body">
-                <div class="config-row">
-                    <label>Source</label>
-                    <select id="pingSource"></select>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i data-lucide="activity"></i>
                 </div>
-                <div class="config-row">
-                    <label>Destination</label>
-                    <select id="pingDestination"></select>
+                <h3 class="feature-title">Packet Simulation</h3>
+                <p class="feature-description">
+                    Visualize data flow with animated packets. Run ping tests, traceroutes, 
+                    and see traffic in real-time.
+                </p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i data-lucide="shield-check"></i>
                 </div>
-                <div class="config-row">
-                    <label>Count</label>
-                    <input type="number" id="pingCount" value="4" min="1" max="100">
+                <h3 class="feature-title">Security Config</h3>
+                <p class="feature-description">
+                    Configure firewalls, access control lists, NAT rules, and VLANs. 
+                    Learn network security hands-on.
+                </p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i data-lucide="route"></i>
                 </div>
-                <div class="config-row">
-                    <label>Size</label>
-                    <input type="number" id="pingSize" value="32" min="32" max="65500">
+                <h3 class="feature-title">Routing Protocols</h3>
+                <p class="feature-description">
+                    Configure static routes, RIP, OSPF, EIGRP, and BGP. Understand 
+                    how routing protocols work.
+                </p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <i data-lucide="download"></i>
                 </div>
-                <button class="btn btn-primary" onclick="startPing()">
-                    <i class="ri-play-fill"></i>
-                    Start Ping
-                </button>
-                
-                <div class="terminal" style="margin-top: var(--space-4);">
-                    <div class="terminal-header">
-                        <div class="terminal-dot red"></div>
-                        <div class="terminal-dot yellow"></div>
-                        <div class="terminal-dot green"></div>
-                        <span class="terminal-title">Ping Output</span>
-                    </div>
-                    <div class="terminal-body" id="pingOutput" style="height: 140px;"></div>
-                </div>
+                <h3 class="feature-title">Save & Export</h3>
+                <p class="feature-description">
+                    Save topologies as JSON files. Export network diagrams as images. 
+                    Share configurations easily.
+                </p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
+    <!-- Device Showcase -->
+    <section class="devices-section">
+        <div class="devices-header animate-on-scroll">
+            <div class="section-badge">
+                <i data-lucide="cpu"></i>
+                50+ Devices
+            </div>
+            <h2 class="section-title">Comprehensive Device Library</h2>
+        </div>
 
-    <!-- Mobile Sidebar/Panel Toggle Script -->
+        <div class="devices-marquee-container">
+            <div class="devices-marquee">
+                <div class="device-tag"><i data-lucide="router"></i><span>Router</span></div>
+                <div class="device-tag"><i data-lucide="git-branch"></i><span>Switch L2</span></div>
+                <div class="device-tag"><i data-lucide="git-merge"></i><span>Switch L3</span></div>
+                <div class="device-tag"><i data-lucide="shield"></i><span>Firewall</span></div>
+                <div class="device-tag"><i data-lucide="server"></i><span>Server</span></div>
+                <div class="device-tag"><i data-lucide="monitor"></i><span>Desktop</span></div>
+                <div class="device-tag"><i data-lucide="laptop"></i><span>Laptop</span></div>
+                <div class="device-tag"><i data-lucide="wifi"></i><span>Access Point</span></div>
+                <div class="device-tag"><i data-lucide="cloud"></i><span>Cloud</span></div>
+                <div class="device-tag"><i data-lucide="globe"></i><span>Internet</span></div>
+                <div class="device-tag"><i data-lucide="database"></i><span>Data Center</span></div>
+                <div class="device-tag"><i data-lucide="lock"></i><span>VPN</span></div>
+                <div class="device-tag"><i data-lucide="smartphone"></i><span>Mobile</span></div>
+                <div class="device-tag"><i data-lucide="printer"></i><span>Printer</span></div>
+                <div class="device-tag"><i data-lucide="camera"></i><span>IP Camera</span></div>
+                <!-- Duplicate for seamless loop -->
+                <div class="device-tag"><i data-lucide="router"></i><span>Router</span></div>
+                <div class="device-tag"><i data-lucide="git-branch"></i><span>Switch L2</span></div>
+                <div class="device-tag"><i data-lucide="git-merge"></i><span>Switch L3</span></div>
+                <div class="device-tag"><i data-lucide="shield"></i><span>Firewall</span></div>
+                <div class="device-tag"><i data-lucide="server"></i><span>Server</span></div>
+                <div class="device-tag"><i data-lucide="monitor"></i><span>Desktop</span></div>
+                <div class="device-tag"><i data-lucide="laptop"></i><span>Laptop</span></div>
+                <div class="device-tag"><i data-lucide="wifi"></i><span>Access Point</span></div>
+                <div class="device-tag"><i data-lucide="cloud"></i><span>Cloud</span></div>
+                <div class="device-tag"><i data-lucide="globe"></i><span>Internet</span></div>
+                <div class="device-tag"><i data-lucide="database"></i><span>Data Center</span></div>
+                <div class="device-tag"><i data-lucide="lock"></i><span>VPN</span></div>
+                <div class="device-tag"><i data-lucide="smartphone"></i><span>Mobile</span></div>
+                <div class="device-tag"><i data-lucide="printer"></i><span>Printer</span></div>
+                <div class="device-tag"><i data-lucide="camera"></i><span>IP Camera</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-card animate-on-scroll">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Build Your Network?</h2>
+                <p class="cta-description">
+                    Start designing professional network topologies in seconds. 
+                    No installation required — completely free and open source.
+                </p>
+                <a href="tool.html" class="cta-btn">
+                    Launch Connixis
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Credit -->
+    <section class="developer-credit">
+        <div class="developer-content">
+            <div class="developer-links">
+                <a href="https://www.omkumarpandey.com.np/" target="_blank" class="developer-link">
+                    <i data-lucide="globe"></i>
+                    Portfolio
+                </a>
+                <a href="https://github.com/ompandey07" target="_blank" class="developer-link">
+                    <i data-lucide="github"></i>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
     <script>
-        // Mobile sidebar toggle
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        
-        if (sidebarToggle && sidebar && sidebarOverlay) {
-            sidebarToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('open');
-                sidebarOverlay.classList.toggle('active');
-            });
-            
-            sidebarOverlay.addEventListener('click', () => {
-                sidebar.classList.remove('open');
-                sidebarOverlay.classList.remove('active');
-            });
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Custom Cursor
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorRing = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+        });
+
+        // Smooth ring follow
+        function animateRing() {
+            ringX += (mouseX - ringX) * 0.12;
+            ringY += (mouseY - ringY) * 0.12;
+            cursorRing.style.left = ringX + 'px';
+            cursorRing.style.top = ringY + 'px';
+            requestAnimationFrame(animateRing);
         }
-        
-        // Mobile panel toggle
-        const panelToggle = document.getElementById('panelToggle');
-        const rightPanel = document.getElementById('rightPanel');
-        
-        if (panelToggle && rightPanel) {
-            panelToggle.addEventListener('click', () => {
-                rightPanel.classList.toggle('open');
+        animateRing();
+
+        // Cursor hover effects
+        const hoverElements = document.querySelectorAll('a, button, .feature-card, .device-tag, .preview-device, .canvas-node');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorDot.classList.add('hover');
+                cursorRing.classList.add('hover');
             });
-        }
-        
-        // Close panels when clicking on canvas (mobile)
-        const canvasContainer = document.getElementById('canvasContainer');
-        if (canvasContainer) {
-            canvasContainer.addEventListener('click', (e) => {
-                if (window.innerWidth <= 900) {
-                    if (sidebar) sidebar.classList.remove('open');
-                    if (sidebarOverlay) sidebarOverlay.classList.remove('active');
-                    if (rightPanel) rightPanel.classList.remove('open');
+            el.addEventListener('mouseleave', () => {
+                cursorDot.classList.remove('hover');
+                cursorRing.classList.remove('hover');
+            });
+        });
+
+        // Click effect
+        document.addEventListener('mousedown', () => cursorRing.classList.add('click'));
+        document.addEventListener('mouseup', () => cursorRing.classList.remove('click'));
+
+        // Navigation scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animated');
+                    }, index * 100);
                 }
             });
-        }
-    </script>
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    <!-- Your Main JavaScript File Goes Here -->
-    <script src="connixis.js"></script>
+        animatedElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+    <script src="console.js"></script>
 </body>
 </html>
