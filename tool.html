@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Connixis - Advanced Network Engineering Simulator">
     <meta name="theme-color" content="#3b82f6">
-    <title>Connixis</title>
+    <title>Connixis - Network Simulator</title>
     
     <!-- Icon Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
     
     <!-- Favicon -->
     <link rel="shortcut icon" href="Logo.png" type="image/x-icon">
-    
+
+
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tool.css">
 </head>
 <body>
-    <div class="app-container">
+    <div class="app-container" id="appContainer">
         <!-- Mobile Sidebar Toggle -->
         <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
             <i class="ri-menu-line"></i>
@@ -31,10 +31,10 @@
         <!-- Left Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-brand">
-                    <div class="sidebar-logo">
-                        <img src="Logo.png" alt="Connixis Logo">
-                    </div>
+                <div class="sidebar-logo">
+                    <a href="index.html">
+                        <img src="Logo.png" alt="Connixis">
+                    </a>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
                     <div class="device-grid">
                         <div class="device-item" draggable="true" data-type="pc">
                             <div class="device-icon endpoint"><i class="ri-computer-fill"></i></div>
-                            <div class="device-name">Desktop</div>
+                            <div class="device-name">Desktop PC</div>
                         </div>
                         <div class="device-item" draggable="true" data-type="laptop">
                             <div class="device-icon endpoint"><i class="ri-macbook-fill"></i></div>
@@ -129,7 +129,7 @@
                 <div class="device-category">
                     <div class="category-header" onclick="toggleCategory(this)">
                         <i class="ri-wifi-line"></i>
-                        <span>Wireless</span>
+                        <span>Wireless Devices</span>
                         <i class="ri-arrow-down-s-line chevron"></i>
                     </div>
                     <div class="device-grid">
@@ -149,6 +149,14 @@
                             <div class="device-icon wireless"><i class="ri-signal-tower-fill"></i></div>
                             <div class="device-name">Antenna</div>
                         </div>
+                        <div class="device-item" draggable="true" data-type="wifi-extender">
+                            <div class="device-icon wireless"><i class="ri-signal-wifi-fill"></i></div>
+                            <div class="device-name">WiFi Extender</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="wireless-bridge">
+                            <div class="device-icon wireless"><i class="ri-share-forward-fill"></i></div>
+                            <div class="device-name">Wireless Bridge</div>
+                        </div>
                     </div>
                 </div>
 
@@ -156,7 +164,7 @@
                 <div class="device-category">
                     <div class="category-header" onclick="toggleCategory(this)">
                         <i class="ri-shield-check-line"></i>
-                        <span>Security</span>
+                        <span>Security Devices</span>
                         <i class="ri-arrow-down-s-line chevron"></i>
                     </div>
                     <div class="device-grid">
@@ -174,7 +182,7 @@
                         </div>
                         <div class="device-item" draggable="true" data-type="vpn">
                             <div class="device-icon security"><i class="ri-lock-2-fill"></i></div>
-                            <div class="device-name">VPN</div>
+                            <div class="device-name">VPN Gateway</div>
                         </div>
                         <div class="device-item" draggable="true" data-type="waf">
                             <div class="device-icon security"><i class="ri-shield-star-fill"></i></div>
@@ -182,7 +190,15 @@
                         </div>
                         <div class="device-item" draggable="true" data-type="proxy">
                             <div class="device-icon security"><i class="ri-filter-3-fill"></i></div>
-                            <div class="device-name">Proxy</div>
+                            <div class="device-name">Proxy Server</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="asa">
+                            <div class="device-icon security"><i class="ri-shield-keyhole-fill"></i></div>
+                            <div class="device-name">Cisco ASA</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="utm">
+                            <div class="device-icon security"><i class="ri-shield-check-fill"></i></div>
+                            <div class="device-name">UTM</div>
                         </div>
                     </div>
                 </div>
@@ -219,6 +235,41 @@
                             <div class="device-icon cloud"><i class="ri-settings-4-fill"></i></div>
                             <div class="device-name">DHCP Server</div>
                         </div>
+                        <div class="device-item" draggable="true" data-type="cdn">
+                            <div class="device-icon cloud"><i class="ri-speed-fill"></i></div>
+                            <div class="device-name">CDN Node</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="wan-emulator">
+                            <div class="device-icon cloud"><i class="ri-exchange-line"></i></div>
+                            <div class="device-name">WAN Emulator</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Devices -->
+                <div class="device-category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <i class="ri-hard-drive-2-line"></i>
+                        <span>Storage Devices</span>
+                        <i class="ri-arrow-down-s-line chevron"></i>
+                    </div>
+                    <div class="device-grid">
+                        <div class="device-item" draggable="true" data-type="nas">
+                            <div class="device-icon storage"><i class="ri-hard-drive-2-fill"></i></div>
+                            <div class="device-name">NAS</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="san">
+                            <div class="device-icon storage"><i class="ri-server-fill"></i></div>
+                            <div class="device-name">SAN</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="backup-server">
+                            <div class="device-icon storage"><i class="ri-database-fill"></i></div>
+                            <div class="device-name">Backup Server</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="file-server">
+                            <div class="device-icon storage"><i class="ri-folder-5-fill"></i></div>
+                            <div class="device-name">File Server</div>
+                        </div>
                     </div>
                 </div>
 
@@ -246,6 +297,68 @@
                             <div class="device-icon network"><i class="ri-cpu-fill"></i></div>
                             <div class="device-name">PLC</div>
                         </div>
+                        <div class="device-item" draggable="true" data-type="iot-gateway">
+                            <div class="device-icon wireless"><i class="ri-door-lock-fill"></i></div>
+                            <div class="device-name">IoT Gateway</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="scada">
+                            <div class="device-icon network"><i class="ri-dashboard-3-fill"></i></div>
+                            <div class="device-name">SCADA</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Voice & Video -->
+                <div class="device-category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <i class="ri-vidicon-line"></i>
+                        <span>Voice & Video</span>
+                        <i class="ri-arrow-down-s-line chevron"></i>
+                    </div>
+                    <div class="device-grid">
+                        <div class="device-item" draggable="true" data-type="voip-server">
+                            <div class="device-icon endpoint"><i class="ri-voiceprint-fill"></i></div>
+                            <div class="device-name">VoIP Server</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="video-conf">
+                            <div class="device-icon endpoint"><i class="ri-vidicon-fill"></i></div>
+                            <div class="device-name">Video Conf</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="pbx">
+                            <div class="device-icon endpoint"><i class="ri-phone-fill"></i></div>
+                            <div class="device-name">PBX</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="sip-trunk">
+                            <div class="device-icon network"><i class="ri-phone-line"></i></div>
+                            <div class="device-name">SIP Trunk</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connections -->
+                <div class="device-category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <i class="ri-links-line"></i>
+                        <span>Connection Points</span>
+                        <i class="ri-arrow-down-s-line chevron"></i>
+                    </div>
+                    <div class="device-grid">
+                        <div class="device-item" draggable="true" data-type="patch-panel">
+                            <div class="device-icon network"><i class="ri-layout-grid-fill"></i></div>
+                            <div class="device-name">Patch Panel</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="wall-jack">
+                            <div class="device-icon endpoint"><i class="ri-plug-fill"></i></div>
+                            <div class="device-name">Wall Jack</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="fiber-node">
+                            <div class="device-icon cloud"><i class="ri-flashlight-fill"></i></div>
+                            <div class="device-name">Fiber Node</div>
+                        </div>
+                        <div class="device-item" draggable="true" data-type="mdf">
+                            <div class="device-icon network"><i class="ri-building-fill"></i></div>
+                            <div class="device-name">MDF/IDF</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -266,7 +379,6 @@
                     </button>
                     <button class="tool-btn icon-only" id="noteTool" title="Add Note (N)">
                         <i class="ri-sticky-note-fill"></i>
-                        <span>Note</span>
                     </button>
                 </div>
 
@@ -292,7 +404,6 @@
                     </button>
                     <button class="tool-btn icon-only" id="packetCapture" title="Packet Capture">
                         <i class="ri-file-search-fill"></i>
-                        <span>Capture</span>
                     </button>
                 </div>
 
@@ -303,18 +414,20 @@
                     </button>
                     <button class="tool-btn icon-only" id="macLookup" title="MAC Lookup">
                         <i class="ri-search-2-fill"></i>
-                        <span>MAC</span>
                     </button>
                 </div>
 
                 <div class="toolbar-group">
-                    <button class="tool-btn icon-only" id="zoomIn" title="Zoom In">
+                    <button class="tool-btn icon-only" id="zoomIn" title="Zoom In (+)">
                         <i class="ri-zoom-in-fill"></i>
                     </button>
-                    <button class="tool-btn icon-only" id="zoomOut" title="Zoom Out">
+                    <button class="tool-btn icon-only" id="zoomOut" title="Zoom Out (-)">
                         <i class="ri-zoom-out-fill"></i>
                     </button>
                     <button class="tool-btn icon-only" id="fitView" title="Fit to View">
+                        <i class="ri-focus-3-fill"></i>
+                    </button>
+                    <button class="tool-btn icon-only" id="fullscreenBtn" title="Toggle Fullscreen (F11)">
                         <i class="ri-fullscreen-fill"></i>
                     </button>
                 </div>
@@ -324,15 +437,18 @@
                         <i class="ri-play-fill"></i>
                         <span>Run</span>
                     </button>
-                    <button class="tool-btn icon-only" id="saveTopology" title="Save Topology">
+                    
+                    <!-- Save Button - Opens Modal -->
+                    <button class="tool-btn" id="saveBtn" title="Save (Ctrl+S)">
                         <i class="ri-save-3-fill"></i>
+                        <span>Save</span>
                     </button>
-                    <button class="tool-btn icon-only" id="loadTopology" title="Load Topology">
+                    
+                    <!-- Load Button -->
+                    <button class="tool-btn icon-only" id="loadBtn" title="Load (Ctrl+O)">
                         <i class="ri-folder-open-fill"></i>
                     </button>
-                    <button class="tool-btn icon-only" id="exportImage" title="Export as Image">
-                        <i class="ri-image-fill"></i>
-                    </button>
+                    
                     <button class="tool-btn danger icon-only" id="clearAll" title="Clear All">
                         <i class="ri-delete-bin-fill"></i>
                     </button>
@@ -341,8 +457,23 @@
 
             <!-- Canvas -->
             <div class="canvas-container" id="canvasContainer">
-                <div class="canvas-grid"></div>
-                <svg id="networkCanvas" xmlns="http://www.w3.org/2000/svg"></svg>
+                <div id="zoomWrapper">
+                    <div class="canvas-grid"></div>
+                    <svg id="networkCanvas" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="ethernetGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#5ba3f7"/>
+                                <stop offset="50%" style="stop-color:#3b82f6"/>
+                                <stop offset="100%" style="stop-color:#2563eb"/>
+                            </linearGradient>
+                            <linearGradient id="fiberGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fbbf24"/>
+                                <stop offset="50%" style="stop-color:#f59e0b"/>
+                                <stop offset="100%" style="stop-color:#d97706"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
             </div>
 
             <!-- Status Bar -->
@@ -411,7 +542,6 @@
             <div class="panel-content">
                 <!-- Config Panel -->
                 <div class="panel-section active" id="configPanel">
-                    <!-- Stats -->
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-icon" style="background: var(--accent-primary-light); color: var(--accent-primary);">
@@ -443,13 +573,11 @@
                         </div>
                     </div>
 
-                    <!-- Device Config -->
                     <div class="config-group" id="deviceConfigGroup" style="display: none;">
                         <div class="config-group-header">
                             <i class="ri-settings-4-fill"></i>
                             <h4>Device Configuration</h4>
                         </div>
-
                         <div class="config-row">
                             <label>Hostname</label>
                             <input type="text" id="deviceName" placeholder="Device name">
@@ -484,7 +612,6 @@
                                 <option value="100">VLAN 100 - Guest</option>
                             </select>
                         </div>
-
                         <button class="btn btn-primary" id="applyConfig">
                             <i class="ri-check-fill"></i>
                             Apply
@@ -495,7 +622,6 @@
                         </button>
                     </div>
 
-                    <!-- Interfaces -->
                     <div class="config-group" id="interfaceConfig" style="display: none;">
                         <div class="config-group-header">
                             <i class="ri-ethernet-fill"></i>
@@ -504,7 +630,6 @@
                         <div id="interfaceList"></div>
                     </div>
 
-                    <!-- Empty State -->
                     <div class="empty-state" id="emptyState">
                         <i class="ri-cursor-fill"></i>
                         <p>Select a device to configure</p>
@@ -816,12 +941,15 @@
                             <i class="ri-terminal-box-fill"></i>
                             <h4>Command Line</h4>
                         </div>
-                        <div class="terminal">
+                        <div class="terminal" id="terminal">
                             <div class="terminal-header">
                                 <div class="terminal-dot red"></div>
                                 <div class="terminal-dot yellow"></div>
                                 <div class="terminal-dot green"></div>
                                 <span class="terminal-title">Connixis CLI</span>
+                                <button class="terminal-fullscreen-btn" id="terminalFullscreenBtn" title="Toggle Fullscreen">
+                                    <i class="ri-fullscreen-fill"></i>
+                                </button>
                             </div>
                             <div class="terminal-body" id="terminalOutput">
                                 <div class="terminal-line info">╔════════════════════════════════════╗</div>
@@ -880,7 +1008,7 @@
         </div>
         <div class="context-menu-item" data-action="capture">
             <i class="ri-file-search-fill"></i>
-            Capture
+            Packet Capture
         </div>
         <div class="context-menu-separator"></div>
         <div class="context-menu-item" data-action="enable">
@@ -899,6 +1027,54 @@
         <div class="context-menu-item danger" data-action="delete">
             <i class="ri-delete-bin-fill"></i>
             Delete
+        </div>
+    </div>
+
+    <!-- Save Modal -->
+    <div class="modal" id="saveModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="ri-save-3-fill"></i> Save Topology</h3>
+                <button class="modal-close" onclick="closeModal('saveModal')">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: var(--space-4); color: var(--text-secondary);">Choose a format to save your network topology:</p>
+                
+                <div class="save-format-grid">
+                    <div class="save-format-option" data-format="json" onclick="selectSaveFormat('json')">
+                        <i class="ri-file-code-fill"></i>
+                        <span>JSON</span>
+                        <small>Editable format</small>
+                    </div>
+                    <div class="save-format-option" data-format="png" onclick="selectSaveFormat('png')">
+                        <i class="ri-image-fill"></i>
+                        <span>PNG</span>
+                        <small>High quality image</small>
+                    </div>
+                    <div class="save-format-option" data-format="jpg" onclick="selectSaveFormat('jpg')">
+                        <i class="ri-image-2-fill"></i>
+                        <span>JPG</span>
+                        <small>Compressed image</small>
+                    </div>
+                </div>
+
+                <div class="save-name-input" id="saveNameInput">
+                    <label for="saveFileName">File Name:</label>
+                    <input type="text" id="saveFileName" placeholder="my-network-topology">
+                </div>
+
+                <div class="save-modal-actions">
+                    <button class="btn" style="background: var(--bg-tertiary); color: var(--text-secondary); border-color: var(--border-primary);" onclick="closeModal('saveModal')">
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary" id="confirmSaveBtn" onclick="confirmSave()" disabled>
+                        <i class="ri-download-fill"></i>
+                        Save File
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -924,7 +1100,6 @@
                     <i class="ri-calculator-fill"></i>
                     Calculate
                 </button>
-                
                 <div class="subnet-results" id="subnetResults" style="display: none;"></div>
             </div>
         </div>
@@ -960,7 +1135,6 @@
                     <i class="ri-play-fill"></i>
                     Start Ping
                 </button>
-                
                 <div class="terminal" style="margin-top: var(--space-4);">
                     <div class="terminal-header">
                         <div class="terminal-dot red"></div>
@@ -968,7 +1142,7 @@
                         <div class="terminal-dot green"></div>
                         <span class="terminal-title">Ping Output</span>
                     </div>
-                    <div class="terminal-body" id="pingOutput" style="height: 140px;"></div>
+                    <div class="terminal-body" id="pingOutput" style="height: 150px;"></div>
                 </div>
             </div>
         </div>
@@ -977,49 +1151,8 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- Mobile Sidebar/Panel Toggle Script -->
-    <script>
-        // Mobile sidebar toggle
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        
-        if (sidebarToggle && sidebar && sidebarOverlay) {
-            sidebarToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('open');
-                sidebarOverlay.classList.toggle('active');
-            });
-            
-            sidebarOverlay.addEventListener('click', () => {
-                sidebar.classList.remove('open');
-                sidebarOverlay.classList.remove('active');
-            });
-        }
-        
-        // Mobile panel toggle
-        const panelToggle = document.getElementById('panelToggle');
-        const rightPanel = document.getElementById('rightPanel');
-        
-        if (panelToggle && rightPanel) {
-            panelToggle.addEventListener('click', () => {
-                rightPanel.classList.toggle('open');
-            });
-        }
-        
-        // Close panels when clicking on canvas (mobile)
-        const canvasContainer = document.getElementById('canvasContainer');
-        if (canvasContainer) {
-            canvasContainer.addEventListener('click', (e) => {
-                if (window.innerWidth <= 900) {
-                    if (sidebar) sidebar.classList.remove('open');
-                    if (sidebarOverlay) sidebarOverlay.classList.remove('active');
-                    if (rightPanel) rightPanel.classList.remove('open');
-                }
-            });
-        }
-    </script>
-
-    <!-- Your Main JavaScript File Goes Here -->
+    <!-- JavaScript -->
     <script src="connixis.js"></script>
+    <script src="console.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
             ports: 1, 
             canRoute: false, 
             layer: 3, 
-            category: 'End Device',
+            category: 'Desktop PC',
             defaultIP: '192.168.1'
         },
         laptop: { 
@@ -21,13 +21,13 @@
             ports: 1, 
             canRoute: false, 
             layer: 3, 
-            category: 'End Device',
+            category: 'Laptop',
             defaultIP: '192.168.1'
         },
         server: { 
             icon: 'ri-server-fill', 
             iconClass: 'endpoint', 
-            ports: 2, 
+            ports: 4, 
             canRoute: false, 
             layer: 3, 
             category: 'Server',
@@ -77,7 +77,7 @@
             ports: 2, 
             canRoute: false, 
             layer: 3, 
-            category: 'VoIP',
+            category: 'IP Phone',
             defaultIP: '192.168.5'
         },
 
@@ -182,7 +182,7 @@
             canRoute: false, 
             layer: 2, 
             wireless: true, 
-            category: 'Mesh',
+            category: 'Mesh Node',
             defaultIP: '192.168.1'
         },
         antenna: { 
@@ -194,6 +194,26 @@
             wireless: true, 
             category: 'Antenna',
             defaultIP: null
+        },
+        'wifi-extender': { 
+            icon: 'ri-signal-wifi-fill', 
+            iconClass: 'wireless', 
+            ports: 1, 
+            canRoute: false, 
+            layer: 2, 
+            wireless: true, 
+            category: 'WiFi Extender',
+            defaultIP: '192.168.1'
+        },
+        'wireless-bridge': { 
+            icon: 'ri-share-forward-fill', 
+            iconClass: 'wireless', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 2, 
+            wireless: true, 
+            category: 'Wireless Bridge',
+            defaultIP: '192.168.1'
         },
 
         // Security Devices
@@ -230,7 +250,7 @@
             ports: 2, 
             canRoute: true, 
             layer: 3, 
-            category: 'VPN',
+            category: 'VPN Gateway',
             defaultIP: '10.10.0'
         },
         waf: { 
@@ -248,7 +268,25 @@
             ports: 2, 
             canRoute: false, 
             layer: 7, 
-            category: 'Proxy',
+            category: 'Proxy Server',
+            defaultIP: '10.0.0'
+        },
+        asa: { 
+            icon: 'ri-shield-keyhole-fill', 
+            iconClass: 'security', 
+            ports: 4, 
+            canRoute: true, 
+            layer: 3, 
+            category: 'Cisco ASA',
+            defaultIP: '10.0.0'
+        },
+        utm: { 
+            icon: 'ri-shield-check-fill', 
+            iconClass: 'security', 
+            ports: 4, 
+            canRoute: true, 
+            layer: 7, 
+            category: 'UTM',
             defaultIP: '10.0.0'
         },
 
@@ -295,7 +333,7 @@
             ports: 1, 
             canRoute: false, 
             layer: 7, 
-            category: 'DNS',
+            category: 'DNS Server',
             defaultIP: '10.0.1'
         },
         dhcp: { 
@@ -304,8 +342,64 @@
             ports: 1, 
             canRoute: false, 
             layer: 7, 
-            category: 'DHCP',
+            category: 'DHCP Server',
             defaultIP: '10.0.1'
+        },
+        cdn: { 
+            icon: 'ri-speed-fill', 
+            iconClass: 'cloud', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 7, 
+            category: 'CDN Node',
+            defaultIP: '172.16.0'
+        },
+        'wan-emulator': { 
+            icon: 'ri-exchange-line', 
+            iconClass: 'cloud', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 3, 
+            category: 'WAN Emulator',
+            defaultIP: '10.0.0'
+        },
+
+        // Storage Devices
+        nas: { 
+            icon: 'ri-hard-drive-2-fill', 
+            iconClass: 'storage', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 3, 
+            category: 'NAS',
+            defaultIP: '192.168.1'
+        },
+        san: { 
+            icon: 'ri-server-fill', 
+            iconClass: 'storage', 
+            ports: 4, 
+            canRoute: false, 
+            layer: 2, 
+            category: 'SAN',
+            defaultIP: '10.0.10'
+        },
+        'backup-server': { 
+            icon: 'ri-database-fill', 
+            iconClass: 'storage', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 3, 
+            category: 'Backup Server',
+            defaultIP: '10.0.1'
+        },
+        'file-server': { 
+            icon: 'ri-folder-5-fill', 
+            iconClass: 'storage', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 3, 
+            category: 'File Server',
+            defaultIP: '192.168.1'
         },
 
         // IoT Devices
@@ -344,6 +438,100 @@
             layer: 2, 
             category: 'PLC',
             defaultIP: '192.168.100'
+        },
+        'iot-gateway': { 
+            icon: 'ri-door-lock-fill', 
+            iconClass: 'wireless', 
+            ports: 2, 
+            canRoute: true, 
+            layer: 3, 
+            category: 'IoT Gateway',
+            defaultIP: '192.168.20'
+        },
+        scada: { 
+            icon: 'ri-dashboard-3-fill', 
+            iconClass: 'network', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 3, 
+            category: 'SCADA',
+            defaultIP: '192.168.100'
+        },
+
+        // Voice & Video
+        'voip-server': { 
+            icon: 'ri-voiceprint-fill', 
+            iconClass: 'endpoint', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 7, 
+            category: 'VoIP Server',
+            defaultIP: '10.0.5'
+        },
+        'video-conf': { 
+            icon: 'ri-vidicon-fill', 
+            iconClass: 'endpoint', 
+            ports: 1, 
+            canRoute: false, 
+            layer: 7, 
+            category: 'Video Conf',
+            defaultIP: '192.168.5'
+        },
+        pbx: { 
+            icon: 'ri-phone-fill', 
+            iconClass: 'endpoint', 
+            ports: 4, 
+            canRoute: false, 
+            layer: 7, 
+            category: 'PBX',
+            defaultIP: '10.0.5'
+        },
+        'sip-trunk': { 
+            icon: 'ri-phone-line', 
+            iconClass: 'network', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 5, 
+            category: 'SIP Trunk',
+            defaultIP: '10.0.5'
+        },
+
+        // Connection Points
+        'patch-panel': { 
+            icon: 'ri-layout-grid-fill', 
+            iconClass: 'network', 
+            ports: 24, 
+            canRoute: false, 
+            layer: 1, 
+            category: 'Patch Panel',
+            defaultIP: null
+        },
+        'wall-jack': { 
+            icon: 'ri-plug-fill', 
+            iconClass: 'endpoint', 
+            ports: 1, 
+            canRoute: false, 
+            layer: 1, 
+            category: 'Wall Jack',
+            defaultIP: null
+        },
+        'fiber-node': { 
+            icon: 'ri-flashlight-fill', 
+            iconClass: 'cloud', 
+            ports: 2, 
+            canRoute: false, 
+            layer: 1, 
+            category: 'Fiber Node',
+            defaultIP: null
+        },
+        mdf: { 
+            icon: 'ri-building-fill', 
+            iconClass: 'network', 
+            ports: 8, 
+            canRoute: false, 
+            layer: 1, 
+            category: 'MDF/IDF',
+            defaultIP: null
         }
     };
 
@@ -381,7 +569,10 @@
         commandHistoryIndex: -1,
         isDragging: false,
         draggedDevice: null,
-        dragOffset: { x: 0, y: 0 }
+        dragOffset: { x: 0, y: 0 },
+        terminalFullscreen: false,
+        isFullscreen: false,
+        selectedSaveFormat: null
     };
 
     // ============================================
@@ -391,18 +582,20 @@
 
     function cacheElements() {
         const ids = [
-            'canvasContainer', 'networkCanvas', 'sidebar', 'sidebarToggle', 
-            'sidebarOverlay', 'rightPanel', 'panelToggle', 'contextMenu',
-            'terminalOutput', 'terminalInput', 'deviceCount', 'connectionCount',
-            'packetCount', 'totalDevices', 'totalLinks', 'activePackets',
-            'networkHealth', 'currentTime', 'zoomLevel', 'deviceConfigGroup',
-            'interfaceConfig', 'interfaceList', 'emptyState', 'deviceName',
-            'deviceIP', 'deviceSubnet', 'deviceGateway', 'deviceDNS',
-            'deviceMAC', 'deviceVLAN', 'routingTableBody', 'routeNetwork',
+            'appContainer', 'canvasContainer', 'networkCanvas', 'sidebar', 'sidebarToggle', 
+            'sidebarOverlay', 'rightPanel', 'panelToggle', 'contextMenu', 'zoomWrapper',
+            'terminalOutput', 'terminalInput', 'terminal', 'terminalFullscreenBtn',
+            'deviceCount', 'connectionCount', 'packetCount', 'totalDevices', 
+            'totalLinks', 'activePackets', 'networkHealth', 'currentTime', 
+            'zoomLevel', 'deviceConfigGroup', 'interfaceConfig', 'interfaceList', 
+            'emptyState', 'deviceName', 'deviceIP', 'deviceSubnet', 'deviceGateway', 
+            'deviceDNS', 'deviceMAC', 'deviceVLAN', 'routingTableBody', 'routeNetwork',
             'routeMask', 'routeNextHop', 'routeInterface', 'routeMetric',
-            'subnetModal', 'pingModal', 'subnetIP', 'subnetCIDR', 'subnetResults',
+            'subnetModal', 'pingModal', 'saveModal', 'subnetIP', 'subnetCIDR', 'subnetResults',
             'pingSource', 'pingDestination', 'pingCount', 'pingSize', 'pingOutput',
-            'toastContainer', 'cableType', 'selectTool', 'connectTool'
+            'toastContainer', 'cableType', 'selectTool', 'connectTool',
+            'saveBtn', 'loadBtn', 'saveFileName', 'saveNameInput', 'confirmSaveBtn',
+            'fullscreenBtn'
         ];
 
         ids.forEach(id => {
@@ -414,9 +607,6 @@
     // UTILITY FUNCTIONS
     // ============================================
 
-    /**
-     * Generate a random MAC address
-     */
     function generateMAC() {
         const hex = '0123456789ABCDEF';
         let mac = '';
@@ -428,9 +618,6 @@
         return mac;
     }
 
-    /**
-     * Generate an IP address based on device type
-     */
     function generateIP(type) {
         const config = deviceTypes[type];
         if (!config || !config.defaultIP || config.defaultIP === 'PUBLIC') {
@@ -439,9 +626,6 @@
         return `${config.defaultIP}.${Math.floor(Math.random() * 254) + 1}`;
     }
 
-    /**
-     * Show toast notification
-     */
     function showToast(message, type = 'info') {
         const container = elements.toastContainer;
         if (!container) return;
@@ -470,9 +654,6 @@
         }, 3000);
     }
 
-    /**
-     * Update statistics display
-     */
     function updateStats() {
         const stats = {
             deviceCount: state.devices.length,
@@ -489,35 +670,445 @@
         });
     }
 
-    /**
-     * Update current time display
-     */
     function updateTime() {
         if (elements.currentTime) {
             elements.currentTime.textContent = new Date().toLocaleTimeString();
         }
     }
 
-    /**
-     * Apply zoom level
-     */
+    // ============================================
+    // ZOOM FUNCTIONALITY - FIXED
+    // ============================================
+
     function applyZoom() {
-        if (elements.canvasContainer) {
-            elements.canvasContainer.style.transform = `scale(${state.zoomLevel})`;
-            elements.canvasContainer.style.transformOrigin = 'center center';
-        }
         if (elements.zoomLevel) {
             elements.zoomLevel.textContent = `${Math.round(state.zoomLevel * 100)}%`;
         }
+
+        const wrapper = elements.zoomWrapper;
+        if (wrapper) {
+            wrapper.style.transform = `scale(${state.zoomLevel})`;
+            wrapper.style.transformOrigin = 'center center';
+        }
+    }
+
+    function zoomIn() {
+        state.zoomLevel = Math.min(state.zoomLevel + 0.1, 2);
+        applyZoom();
+        showToast(`Zoom: ${Math.round(state.zoomLevel * 100)}%`, 'info');
+    }
+
+    function zoomOut() {
+        state.zoomLevel = Math.max(state.zoomLevel - 0.1, 0.3);
+        applyZoom();
+        showToast(`Zoom: ${Math.round(state.zoomLevel * 100)}%`, 'info');
+    }
+
+    function fitView() {
+        if (state.devices.length === 0) {
+            state.zoomLevel = 1;
+            applyZoom();
+            showToast('No devices to fit', 'info');
+            return;
+        }
+
+        const container = elements.canvasContainer;
+        if (!container) return;
+
+        let minX = Infinity, minY = Infinity;
+        let maxX = -Infinity, maxY = -Infinity;
+
+        state.devices.forEach(device => {
+            minX = Math.min(minX, device.x);
+            minY = Math.min(minY, device.y);
+            maxX = Math.max(maxX, device.x + 100);
+            maxY = Math.max(maxY, device.y + 140);
+        });
+
+        const padding = 100;
+        const contentWidth = maxX - minX + (padding * 2);
+        const contentHeight = maxY - minY + (padding * 2);
+
+        const containerRect = container.getBoundingClientRect();
+
+        const scaleX = containerRect.width / contentWidth;
+        const scaleY = containerRect.height / contentHeight;
+
+        state.zoomLevel = Math.min(scaleX, scaleY, 1.5);
+        state.zoomLevel = Math.max(state.zoomLevel, 0.3);
+
+        applyZoom();
+        showToast(`Fit to view: ${Math.round(state.zoomLevel * 100)}%`, 'success');
+    }
+
+    function resetZoom() {
+        state.zoomLevel = 1;
+        applyZoom();
+        showToast('Zoom reset to 100%', 'info');
+    }
+
+    // ============================================
+    // FULLSCREEN FUNCTIONALITY
+    // ============================================
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement && 
+            !document.mozFullScreenElement && 
+            !document.webkitFullscreenElement && 
+            !document.msFullscreenElement) {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+            state.isFullscreen = true;
+            if (elements.fullscreenBtn) {
+                elements.fullscreenBtn.innerHTML = '<i class="ri-fullscreen-exit-fill"></i>';
+                elements.fullscreenBtn.title = 'Exit Fullscreen (F11)';
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+            state.isFullscreen = false;
+            if (elements.fullscreenBtn) {
+                elements.fullscreenBtn.innerHTML = '<i class="ri-fullscreen-fill"></i>';
+                elements.fullscreenBtn.title = 'Toggle Fullscreen (F11)';
+            }
+        }
+    }
+
+    function handleFullscreenChange() {
+        if (!document.fullscreenElement && 
+            !document.mozFullScreenElement && 
+            !document.webkitFullscreenElement && 
+            !document.msFullscreenElement) {
+            state.isFullscreen = false;
+            if (elements.fullscreenBtn) {
+                elements.fullscreenBtn.innerHTML = '<i class="ri-fullscreen-fill"></i>';
+                elements.fullscreenBtn.title = 'Toggle Fullscreen (F11)';
+            }
+        }
+    }
+
+    // ============================================
+    // SAVE MODAL FUNCTIONALITY
+    // ============================================
+
+    function openSaveModal() {
+        state.selectedSaveFormat = null;
+        
+        document.querySelectorAll('.save-format-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        
+        if (elements.saveNameInput) {
+            elements.saveNameInput.classList.remove('active');
+        }
+        
+        if (elements.saveFileName) {
+            elements.saveFileName.value = `network-topology-${Date.now()}`;
+        }
+        
+        if (elements.confirmSaveBtn) {
+            elements.confirmSaveBtn.disabled = true;
+        }
+        
+        openModal('saveModal');
+    }
+
+    function selectSaveFormat(format) {
+        state.selectedSaveFormat = format;
+        
+        document.querySelectorAll('.save-format-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        
+        const selectedOption = document.querySelector(`.save-format-option[data-format="${format}"]`);
+        if (selectedOption) {
+            selectedOption.classList.add('selected');
+        }
+        
+        if (elements.saveNameInput) {
+            elements.saveNameInput.classList.add('active');
+        }
+        
+        if (elements.confirmSaveBtn) {
+            elements.confirmSaveBtn.disabled = false;
+        }
+        
+        if (elements.saveFileName) {
+            elements.saveFileName.focus();
+            elements.saveFileName.select();
+        }
+    }
+
+    function confirmSave() {
+        if (!state.selectedSaveFormat) {
+            showToast('Please select a format', 'warning');
+            return;
+        }
+        
+        const fileName = elements.saveFileName?.value?.trim() || `network-topology-${Date.now()}`;
+        
+        switch (state.selectedSaveFormat) {
+            case 'json':
+                saveAsJSON(fileName);
+                break;
+            case 'png':
+                saveAsImage(fileName, 'png');
+                break;
+            case 'jpg':
+                saveAsImage(fileName, 'jpeg');
+                break;
+        }
+        
+        closeModal('saveModal');
+    }
+
+    function saveAsJSON(fileName) {
+        const topology = {
+            name: fileName,
+            devices: state.devices,
+            connections: state.connections,
+            vlans: state.vlans,
+            aclRules: state.aclRules,
+            version: '3.0',
+            savedAt: new Date().toISOString()
+        };
+
+        const blob = new Blob([JSON.stringify(topology, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${fileName}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        showToast(`Saved as ${fileName}.json`, 'success');
+        addTerminalLine(`%SYS-5-CONFIG_I: Configuration saved to ${fileName}.json`, 'info');
+    }
+
+    function saveAsImage(fileName, format) {
+        const container = elements.canvasContainer;
+        if (!container) {
+            showToast('Canvas not found', 'error');
+            return;
+        }
+
+        if (state.devices.length === 0) {
+            showToast('No devices to export', 'warning');
+            return;
+        }
+
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let minX = Infinity, minY = Infinity;
+        let maxX = -Infinity, maxY = -Infinity;
+
+        state.devices.forEach(device => {
+            minX = Math.min(minX, device.x);
+            minY = Math.min(minY, device.y);
+            maxX = Math.max(maxX, device.x + 100);
+            maxY = Math.max(maxY, device.y + 140);
+        });
+
+        const padding = 50;
+        const width = maxX - minX + (padding * 2);
+        const height = maxY - minY + (padding * 2);
+        
+        const scale = 2;
+        canvas.width = width * scale;
+        canvas.height = height * scale;
+        ctx.scale(scale, scale);
+        
+        if (format === 'jpeg') {
+            ctx.fillStyle = '#f1f5f9';
+        } else {
+            ctx.fillStyle = '#ffffff';
+        }
+        ctx.fillRect(0, 0, width, height);
+        
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 0.5;
+        for (let x = 0; x < width; x += 20) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, height);
+            ctx.stroke();
+        }
+        for (let y = 0; y < height; y += 20) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(width, y);
+            ctx.stroke();
+        }
+        
+        state.connections.forEach(conn => {
+            const d1 = state.devices.find(d => d.id === conn.device1);
+            const d2 = state.devices.find(d => d.id === conn.device2);
+            if (d1 && d2) {
+                const x1 = d1.x - minX + padding + 50;
+                const y1 = d1.y - minY + padding + 70;
+                const x2 = d2.x - minX + padding + 50;
+                const y2 = d2.y - minY + padding + 70;
+                
+                ctx.beginPath();
+                ctx.strokeStyle = getCableColor(conn.type);
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+                
+                ctx.fillStyle = getCableColor(conn.type);
+                ctx.beginPath();
+                ctx.arc(x1, y1, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x2, y2, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        });
+        
+        state.devices.forEach(device => {
+            const x = device.x - minX + padding;
+            const y = device.y - minY + padding;
+            
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 4;
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x, y, 100, 120);
+            
+            ctx.shadowColor = 'transparent';
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, 100, 120);
+            
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(x, y, 100, 20);
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(x, y + 20);
+            ctx.lineTo(x + 100, y + 20);
+            ctx.stroke();
+            
+            const statusColor = device.status === 'online' ? '#10b981' : 
+                               device.status === 'offline' ? '#ef4444' : '#f59e0b';
+            ctx.fillStyle = statusColor;
+            ctx.beginPath();
+            ctx.arc(x + 12, y + 10, 4, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 11px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(device.name.substring(0, 14), x + 50, y + 75);
+            
+            ctx.fillStyle = '#3b82f6';
+            ctx.font = '10px monospace';
+            ctx.fillText(device.ip || 'No IP', x + 50, y + 92);
+            
+            ctx.fillStyle = '#64748b';
+            ctx.font = '8px monospace';
+            ctx.fillText(device.mac, x + 50, y + 106);
+        });
+        
+        ctx.fillStyle = '#64748b';
+        ctx.font = '10px sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(`Connixis Network Simulator - ${new Date().toLocaleString()}`, 10, height - 10);
+        
+        const link = document.createElement('a');
+        link.download = `${fileName}.${format === 'jpeg' ? 'jpg' : 'png'}`;
+        link.href = canvas.toDataURL(`image/${format}`, format === 'jpeg' ? 0.9 : 1);
+        link.click();
+        
+        showToast(`Saved as ${fileName}.${format === 'jpeg' ? 'jpg' : 'png'}`, 'success');
+        addTerminalLine(`%SYS-5-CONFIG_I: Topology exported as ${format.toUpperCase()}`, 'info');
+    }
+
+    function loadTopologyFile() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.json';
+
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const topology = JSON.parse(event.target.result);
+
+                    clearCanvas(false);
+
+                    const wrapper = elements.zoomWrapper;
+                    const container = wrapper || elements.canvasContainer;
+
+                    topology.devices.forEach(d => {
+                        state.devices.push(d);
+                        const el = createDeviceElement(d);
+                        if (el && container) {
+                            container.appendChild(el);
+                        }
+                    });
+
+                    topology.connections.forEach(c => {
+                        state.connections.push(c);
+                        drawConnection(c);
+
+                        const port1El = document.querySelector(
+                            `#device-${c.device1} .port-indicator[data-port="${c.port1}"]`
+                        );
+                        const port2El = document.querySelector(
+                            `#device-${c.device2} .port-indicator[data-port="${c.port2}"]`
+                        );
+                        if (port1El) port1El.classList.add('connected');
+                        if (port2El) port2El.classList.add('connected');
+                    });
+
+                    if (topology.vlans) state.vlans = topology.vlans;
+                    if (topology.aclRules) state.aclRules = topology.aclRules;
+
+                    state.deviceIdCounter = Math.max(...state.devices.map(d => d.id), 0) + 1;
+                    state.connectionIdCounter = Math.max(...state.connections.map(c => c.id), 0) + 1;
+
+                    updateStats();
+                    showToast(`Loaded: ${topology.name || 'Topology'}`, 'success');
+                    addTerminalLine(`%SYS-5-CONFIG_I: Configuration loaded from ${file.name}`, 'info');
+
+                } catch (err) {
+                    showToast('Failed to load: ' + err.message, 'error');
+                }
+            };
+            reader.readAsText(file);
+        };
+
+        input.click();
     }
 
     // ============================================
     // DEVICE MANAGEMENT
     // ============================================
 
-    /**
-     * Create a device DOM element
-     */
     function createDeviceElement(device) {
         const typeConfig = deviceTypes[device.type];
         if (!typeConfig) return null;
@@ -547,13 +1138,11 @@
             <div class="ports-container">${portsHTML}</div>
         `;
 
-        // Add event listeners
         div.addEventListener('mousedown', (e) => handleDeviceMouseDown(e, device));
         div.addEventListener('click', (e) => handleDeviceClick(e, device));
         div.addEventListener('contextmenu', (e) => handleDeviceContextMenu(e, device));
         div.addEventListener('dblclick', () => openDeviceConsole(device));
 
-        // Port event listeners
         div.querySelectorAll('.port-indicator').forEach(port => {
             port.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -579,9 +1168,6 @@
         return div;
     }
 
-    /**
-     * Add a new device to the canvas
-     */
     function addDevice(type, x, y) {
         const typeConfig = deviceTypes[type];
         if (!typeConfig) {
@@ -592,7 +1178,7 @@
         const device = {
             id: state.deviceIdCounter++,
             type: type,
-            name: `${type.charAt(0).toUpperCase() + type.slice(1)}-${state.deviceIdCounter}`,
+            name: `${typeConfig.category.replace(/\s+/g, '-')}-${state.deviceIdCounter}`,
             x: x,
             y: y,
             ip: generateIP(type),
@@ -610,14 +1196,13 @@
             arpTable: [],
             macTable: [],
             config: {
-                hostname: `${type.charAt(0).toUpperCase() + type.slice(1)}-${state.deviceIdCounter}`,
+                hostname: `${typeConfig.category.replace(/\s+/g, '-')}-${state.deviceIdCounter}`,
                 enablePassword: '',
                 sshEnabled: false,
                 spanningTree: true
             }
         };
 
-        // Initialize interfaces
         for (let i = 0; i < typeConfig.ports; i++) {
             const ifName = typeConfig.ports > 4 ? `Fa0/${i}` : `Gi0/${i}`;
             device.interfaces.push({
@@ -635,7 +1220,6 @@
             });
         }
 
-        // Initialize routing table for routing devices
         if (typeConfig.canRoute && device.ip && device.ip !== 'PUBLIC') {
             const networkPart = device.ip.split('.').slice(0, 3).join('.');
             device.routingTable = [
@@ -662,23 +1246,23 @@
 
         state.devices.push(device);
 
-        if (elements.canvasContainer) {
+        const wrapper = elements.zoomWrapper;
+        const container = wrapper || elements.canvasContainer;
+        
+        if (container) {
             const element = createDeviceElement(device);
             if (element) {
-                elements.canvasContainer.appendChild(element);
+                container.appendChild(element);
             }
         }
 
         updateStats();
         showToast(`Added ${typeConfig.category}: ${device.name}`, 'success');
-        addTerminalLine(`%SYS-5-CONFIG_I: Configured from console`, 'info');
+        addTerminalLine(`%SYS-5-CONFIG_I: Device ${device.name} configured`, 'info');
 
         return device;
     }
 
-    /**
-     * Update a device's DOM element
-     */
     function updateDeviceElement(device) {
         const el = document.getElementById(`device-${device.id}`);
         if (!el) return;
@@ -698,11 +1282,7 @@
         if (macEl) macEl.textContent = device.mac;
     }
 
-    /**
-     * Delete a device and its connections
-     */
     function deleteDevice(device) {
-        // Remove associated connections
         const connectionsToRemove = state.connections.filter(c =>
             c.device1 === device.id || c.device2 === device.id
         );
@@ -711,14 +1291,11 @@
             deleteConnection(conn, false);
         });
 
-        // Remove device from state
         state.devices = state.devices.filter(d => d.id !== device.id);
 
-        // Remove DOM element
         const el = document.getElementById(`device-${device.id}`);
         if (el) el.remove();
 
-        // Clear selection if needed
         if (state.selectedDevice?.id === device.id) {
             state.selectedDevice = null;
             if (elements.deviceConfigGroup) elements.deviceConfigGroup.style.display = 'none';
@@ -731,20 +1308,14 @@
         addTerminalLine(`%SYS-5-RELOAD: Device ${device.name} removed`, 'warning');
     }
 
-    /**
-     * Duplicate a device
-     */
     function duplicateDevice(device) {
-        addDevice(device.type, device.x + 50, device.y + 50);
+        addDevice(device.type, device.x + 60, device.y + 60);
     }
 
     // ============================================
     // DEVICE INTERACTION HANDLERS
     // ============================================
 
-    /**
-     * Handle mouse down on device (start drag)
-     */
     function handleDeviceMouseDown(e, device) {
         if (e.button !== 0 || state.connectionMode) return;
         e.preventDefault();
@@ -753,8 +1324,10 @@
         state.isDragging = true;
 
         const rect = e.target.closest('.network-device').getBoundingClientRect();
-        state.dragOffset.x = e.clientX - rect.left;
-        state.dragOffset.y = e.clientY - rect.top;
+        const containerRect = elements.canvasContainer.getBoundingClientRect();
+        
+        state.dragOffset.x = (e.clientX - rect.left) / state.zoomLevel;
+        state.dragOffset.y = (e.clientY - rect.top) / state.zoomLevel;
 
         const el = document.getElementById(`device-${device.id}`);
         if (el) el.style.zIndex = '100';
@@ -763,24 +1336,24 @@
         document.addEventListener('mouseup', handleDeviceDragEnd);
     }
 
-    /**
-     * Handle device dragging
-     */
     function handleDeviceDrag(e) {
         if (!state.draggedDevice || !state.isDragging) return;
 
+        const wrapper = elements.zoomWrapper;
         const container = elements.canvasContainer;
         if (!container) return;
 
         const rect = container.getBoundingClientRect();
-        let x = e.clientX - rect.left - state.dragOffset.x;
-        let y = e.clientY - rect.top - state.dragOffset.y;
+        
+        let x = (e.clientX - rect.left) / state.zoomLevel - state.dragOffset.x;
+        let y = (e.clientY - rect.top) / state.zoomLevel - state.dragOffset.y;
 
-        // Constrain to canvas bounds
-        x = Math.max(0, Math.min(x, container.clientWidth - 100));
-        y = Math.max(0, Math.min(y, container.clientHeight - 120));
+        const wrapperWidth = wrapper ? wrapper.clientWidth : container.clientWidth;
+        const wrapperHeight = wrapper ? wrapper.clientHeight : container.clientHeight;
+        
+        x = Math.max(0, Math.min(x, wrapperWidth / state.zoomLevel - 100));
+        y = Math.max(0, Math.min(y, wrapperHeight / state.zoomLevel - 140));
 
-        // Snap to grid
         x = Math.round(x / 20) * 20;
         y = Math.round(y / 20) * 20;
 
@@ -796,9 +1369,6 @@
         updateConnections();
     }
 
-    /**
-     * Handle drag end
-     */
     function handleDeviceDragEnd() {
         if (state.draggedDevice) {
             const el = document.getElementById(`device-${state.draggedDevice.id}`);
@@ -812,13 +1382,9 @@
         document.removeEventListener('mouseup', handleDeviceDragEnd);
     }
 
-    /**
-     * Handle device click (select)
-     */
     function handleDeviceClick(e, device) {
         e.stopPropagation();
 
-        // Deselect previous device
         if (state.selectedDevice) {
             const prevEl = document.getElementById(`device-${state.selectedDevice.id}`);
             if (prevEl) prevEl.classList.remove('selected');
@@ -834,30 +1400,39 @@
         if (elements.emptyState) elements.emptyState.style.display = 'none';
     }
 
-    /**
-     * Handle device context menu
-     */
     function handleDeviceContextMenu(e, device) {
         e.preventDefault();
 
         const menu = elements.contextMenu;
         if (!menu) return;
 
-        menu.style.left = `${e.clientX}px`;
-        menu.style.top = `${e.clientY}px`;
+        let x = e.clientX;
+        let y = e.clientY;
+        
+        const menuWidth = 200;
+        const menuHeight = 360;
+        
+        if (x + menuWidth > window.innerWidth) {
+            x = window.innerWidth - menuWidth - 10;
+        }
+        if (y + menuHeight > window.innerHeight) {
+            y = window.innerHeight - menuHeight - 10;
+        }
+        
+        x = Math.max(10, x);
+        y = Math.max(10, y);
+
+        menu.style.left = `${x}px`;
+        menu.style.top = `${y}px`;
         menu.classList.add('active');
         menu.dataset.deviceId = device.id;
     }
 
-    /**
-     * Show device configuration in the right panel
-     */
     function showDeviceConfig(device) {
         if (elements.deviceConfigGroup) {
             elements.deviceConfigGroup.style.display = 'block';
         }
 
-        // Fill form fields
         const fields = {
             deviceName: device.name,
             deviceIP: device.ip || '',
@@ -874,7 +1449,6 @@
             }
         });
 
-        // Show interface config for multi-port devices
         if (device.ports > 1 && elements.interfaceConfig && elements.interfaceList) {
             elements.interfaceConfig.style.display = 'block';
             elements.interfaceList.innerHTML = device.interfaces.slice(0, 8).map(iface => `
@@ -893,7 +1467,6 @@
             elements.interfaceConfig.style.display = 'none';
         }
 
-        // Update routing table if router
         if (device.canRoute) {
             updateRoutingTableDisplay(device);
         }
@@ -903,16 +1476,12 @@
     // CONNECTION MANAGEMENT
     // ============================================
 
-    /**
-     * Handle port click for connections
-     */
     function handlePortClick(device, portIndex) {
         const portEl = document.querySelector(
             `#device-${device.id} .port-indicator[data-port="${portIndex}"]`
         );
 
         if (!state.connectionMode) {
-            // Start connection
             state.connectionMode = true;
             state.connectionStart = { device, port: portIndex };
 
@@ -924,7 +1493,6 @@
             const ifName = device.interfaces[portIndex]?.name || `Port ${portIndex}`;
             showToast(`Select destination port from ${device.name}:${ifName}`, 'info');
         } else {
-            // Complete connection
             if (state.connectionStart && state.connectionStart.device.id !== device.id) {
                 const port1Connected = state.connectionStart.device.interfaces[state.connectionStart.port]?.connected;
                 const port2Connected = device.interfaces[portIndex]?.connected;
@@ -936,7 +1504,6 @@
                 }
             }
 
-            // Reset connection mode
             document.querySelectorAll('.port-indicator.connecting').forEach(p => {
                 p.classList.remove('connecting');
             });
@@ -949,9 +1516,6 @@
         }
     }
 
-    /**
-     * Create a new connection between two devices
-     */
     function createConnection(device1, port1, device2, port2) {
         const cableType = elements.cableType ? elements.cableType.value : 'ethernet';
 
@@ -970,7 +1534,6 @@
         state.connections.push(connection);
         drawConnection(connection);
 
-        // Update port indicators
         const port1El = document.querySelector(
             `#device-${device1.id} .port-indicator[data-port="${port1}"]`
         );
@@ -981,7 +1544,6 @@
         if (port1El) port1El.classList.add('connected');
         if (port2El) port2El.classList.add('connected');
 
-        // Update interface state
         if (device1.interfaces[port1]) {
             device1.interfaces[port1].connected = true;
             device1.interfaces[port1].connectedTo = { device: device2.id, port: port2 };
@@ -998,12 +1560,8 @@
 
         showToast(`Connected: ${device1.name}:${if1} ↔ ${device2.name}:${if2}`, 'success');
         addTerminalLine(`%LINK-5-CHANGED: Interface ${if1}, changed state to up`, 'success');
-        addTerminalLine(`%LINEPROTO-5-UPDOWN: Line protocol on ${if1}, changed state to up`, 'success');
     }
 
-    /**
-     * Draw a connection line on the SVG canvas
-     */
     function drawConnection(connection) {
         const svg = elements.networkCanvas;
         if (!svg) return;
@@ -1013,101 +1571,162 @@
 
         if (!device1 || !device2) return;
 
-        // Calculate positions
-        const x1 = device1.x + 45;
-        const y1 = device1.y + 90;
-        const x2 = device2.x + 45;
-        const y2 = device2.y + 90;
+        const x1 = device1.x + 50;
+        const y1 = device1.y + 100;
+        const x2 = device2.x + 50;
+        const y2 = device2.y + 100;
 
-        // Calculate curve control point
-        const midX = (x1 + x2) / 2;
-        const midY = (y1 + y2) / 2;
         const dx = x2 - x1;
         const dy = y2 - y1;
         const dist = Math.sqrt(dx * dx + dy * dy);
-
+        
+        const midX = (x1 + x2) / 2;
+        const midY = (y1 + y2) / 2;
+        
         const perpX = dist > 0 ? -dy / dist : 0;
         const perpY = dist > 0 ? dx / dist : 0;
-        const curveAmount = Math.min(dist * 0.08, 15);
+        const curveAmount = Math.min(dist * 0.1, 30);
+        
         const cx = midX + perpX * curveAmount;
         const cy = midY + perpY * curveAmount;
 
-        // Create SVG path
+        const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        group.setAttribute('id', `connection-${connection.id}`);
+        group.dataset.connectionId = connection.id;
+
+        const shadow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        shadow.setAttribute('d', `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`);
+        shadow.style.fill = 'none';
+        shadow.style.stroke = 'rgba(0,0,0,0.2)';
+        shadow.style.strokeWidth = '6';
+        shadow.style.strokeLinecap = 'round';
+
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('id', `connection-${connection.id}`);
         path.setAttribute('d', `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`);
         path.setAttribute('class', `cable-path cable-${connection.type}`);
-        path.dataset.connectionId = connection.id;
 
-        path.style.pointerEvents = 'stroke';
-        path.style.cursor = 'pointer';
+        const highlight = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        highlight.setAttribute('d', `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`);
+        highlight.style.fill = 'none';
+        highlight.style.stroke = 'rgba(255,255,255,0.3)';
+        highlight.style.strokeWidth = '1';
+        highlight.style.strokeLinecap = 'round';
 
-        path.addEventListener('click', (e) => {
+        const connector1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        connector1.setAttribute('cx', x1);
+        connector1.setAttribute('cy', y1);
+        connector1.setAttribute('r', '5');
+        connector1.style.fill = getCableColor(connection.type);
+        connector1.style.stroke = '#ffffff';
+        connector1.style.strokeWidth = '2';
+
+        const connector2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        connector2.setAttribute('cx', x2);
+        connector2.setAttribute('cy', y2);
+        connector2.setAttribute('r', '5');
+        connector2.style.fill = getCableColor(connection.type);
+        connector2.style.stroke = '#ffffff';
+        connector2.style.strokeWidth = '2';
+
+        group.appendChild(shadow);
+        group.appendChild(path);
+        group.appendChild(highlight);
+        group.appendChild(connector1);
+        group.appendChild(connector2);
+
+        group.style.cursor = 'pointer';
+        group.addEventListener('click', (e) => {
             e.stopPropagation();
             selectConnection(connection);
         });
 
-        path.addEventListener('dblclick', (e) => {
+        group.addEventListener('dblclick', (e) => {
             e.stopPropagation();
             if (confirm('Delete this connection?')) {
                 deleteConnection(connection);
             }
         });
 
-        svg.appendChild(path);
+        svg.appendChild(group);
     }
 
-    /**
-     * Update all connection line positions
-     */
+    function getCableColor(type) {
+        const colors = {
+            ethernet: '#3b82f6',
+            fiber: '#f59e0b',
+            crossover: '#ef4444',
+            serial: '#8b5cf6',
+            console: '#06b6d4',
+            wireless: '#10b981'
+        };
+        return colors[type] || colors.ethernet;
+    }
+
     function updateConnections() {
         state.connections.forEach(conn => {
-            const path = document.getElementById(`connection-${conn.id}`);
-            if (!path) return;
+            const group = document.getElementById(`connection-${conn.id}`);
+            if (!group) return;
 
             const device1 = state.devices.find(d => d.id === conn.device1);
             const device2 = state.devices.find(d => d.id === conn.device2);
 
             if (device1 && device2) {
-                const x1 = device1.x + 45;
-                const y1 = device1.y + 90;
-                const x2 = device2.x + 45;
-                const y2 = device2.y + 90;
+                const x1 = device1.x + 50;
+                const y1 = device1.y + 100;
+                const x2 = device2.x + 50;
+                const y2 = device2.y + 100;
 
-                const midX = (x1 + x2) / 2;
-                const midY = (y1 + y2) / 2;
                 const dx = x2 - x1;
                 const dy = y2 - y1;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-
+                
+                const midX = (x1 + x2) / 2;
+                const midY = (y1 + y2) / 2;
+                
                 const perpX = dist > 0 ? -dy / dist : 0;
                 const perpY = dist > 0 ? dx / dist : 0;
-                const curveAmount = Math.min(dist * 0.08, 15);
+                const curveAmount = Math.min(dist * 0.1, 30);
+                
                 const cx = midX + perpX * curveAmount;
                 const cy = midY + perpY * curveAmount;
 
-                path.setAttribute('d', `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`);
+                const pathD = `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`;
+
+                group.querySelectorAll('path').forEach(path => {
+                    path.setAttribute('d', pathD);
+                });
+
+                const connectors = group.querySelectorAll('circle');
+                if (connectors[0]) {
+                    connectors[0].setAttribute('cx', x1);
+                    connectors[0].setAttribute('cy', y1);
+                }
+                if (connectors[1]) {
+                    connectors[1].setAttribute('cx', x2);
+                    connectors[1].setAttribute('cy', y2);
+                }
             }
         });
     }
 
-    /**
-     * Select a connection
-     */
     function selectConnection(connection) {
         state.selectedConnection = connection;
 
-        // Reset all connection styles
-        document.querySelectorAll('.cable-path').forEach(p => {
-            p.style.strokeWidth = '';
-            p.style.filter = '';
+        document.querySelectorAll('#networkCanvas > g').forEach(g => {
+            const path = g.querySelector('.cable-path');
+            if (path) {
+                path.style.strokeWidth = '';
+                path.style.filter = '';
+            }
         });
 
-        // Highlight selected
-        const path = document.getElementById(`connection-${connection.id}`);
-        if (path) {
-            path.style.strokeWidth = '4';
-            path.style.filter = 'drop-shadow(0 0 6px currentColor)';
+        const group = document.getElementById(`connection-${connection.id}`);
+        if (group) {
+            const path = group.querySelector('.cable-path');
+            if (path) {
+                path.style.strokeWidth = '5';
+                path.style.filter = 'drop-shadow(0 0 8px currentColor)';
+            }
         }
 
         const device1 = state.devices.find(d => d.id === connection.device1);
@@ -1118,14 +1737,10 @@
         }
     }
 
-    /**
-     * Delete a connection
-     */
     function deleteConnection(connection, showNotification = true) {
         const device1 = state.devices.find(d => d.id === connection.device1);
         const device2 = state.devices.find(d => d.id === connection.device2);
 
-        // Update interface state
         if (device1?.interfaces[connection.port1]) {
             device1.interfaces[connection.port1].connected = false;
             device1.interfaces[connection.port1].connectedTo = null;
@@ -1135,7 +1750,6 @@
             device2.interfaces[connection.port2].connectedTo = null;
         }
 
-        // Update port indicators
         const port1El = document.querySelector(
             `#device-${connection.device1} .port-indicator[data-port="${connection.port1}"]`
         );
@@ -1146,12 +1760,10 @@
         if (port1El) port1El.classList.remove('connected');
         if (port2El) port2El.classList.remove('connected');
 
-        // Remove from state
         state.connections = state.connections.filter(c => c.id !== connection.id);
 
-        // Remove SVG element
-        const path = document.getElementById(`connection-${connection.id}`);
-        if (path) path.remove();
+        const group = document.getElementById(`connection-${connection.id}`);
+        if (group) group.remove();
 
         updateStats();
 
@@ -1165,9 +1777,6 @@
     // ROUTING TABLE
     // ============================================
 
-    /**
-     * Update routing table display
-     */
     function updateRoutingTableDisplay(device) {
         const tbody = elements.routingTableBody;
         if (!tbody) return;
@@ -1209,9 +1818,6 @@
         `).join('');
     }
 
-    /**
-     * Add a static route
-     */
     function addRoute() {
         if (!state.selectedDevice || !state.selectedDevice.canRoute) {
             showToast('Select a router device first', 'error');
@@ -1243,7 +1849,6 @@
         addTerminalLine(`ip route ${route.network} ${route.mask} ${route.nextHop}`, 'command');
         showToast('Static route added', 'success');
 
-        // Clear inputs
         if (elements.routeNetwork) elements.routeNetwork.value = '';
         if (elements.routeNextHop) elements.routeNextHop.value = '';
     }
@@ -1252,9 +1857,6 @@
     // PACKET SIMULATION
     // ============================================
 
-    /**
-     * Send a packet from source to destination
-     */
     function sendPacket(source, destination, type = 'icmp') {
         const packet = {
             id: Date.now() + Math.random(),
@@ -1269,16 +1871,14 @@
         updateStats();
     }
 
-    /**
-     * Animate a packet moving across the canvas
-     */
     function animatePacket(packet) {
         const source = state.devices.find(d => d.id === packet.source.id);
         const dest = state.devices.find(d => d.id === packet.destination.id);
 
         if (!source || !dest) return;
 
-        const container = elements.canvasContainer;
+        const wrapper = elements.zoomWrapper;
+        const container = wrapper || elements.canvasContainer;
         if (!container) return;
 
         const packetEl = document.createElement('div');
@@ -1286,9 +1886,9 @@
         packetEl.id = `packet-${packet.id}`;
         container.appendChild(packetEl);
 
-        const startX = source.x + 45;
+        const startX = source.x + 50;
         const startY = source.y + 50;
-        const endX = dest.x + 45;
+        const endX = dest.x + 50;
         const endY = dest.y + 50;
 
         let progress = 0;
@@ -1304,7 +1904,6 @@
                 return;
             }
 
-            // Ease in-out
             const easeProgress = progress < 0.5
                 ? 2 * progress * progress
                 : 1 - Math.pow(-2 * progress + 2, 2) / 2;
@@ -1321,9 +1920,6 @@
         requestAnimationFrame(animate);
     }
 
-    /**
-     * Check if two devices are connected (directly or indirectly)
-     */
     function areDevicesConnected(deviceId1, deviceId2, visited = new Set()) {
         if (deviceId1 === deviceId2) return true;
         if (visited.has(deviceId1)) return false;
@@ -1348,9 +1944,6 @@
     // PING TEST
     // ============================================
 
-    /**
-     * Open ping modal
-     */
     function openPingModal(sourceDevice = null) {
         const modal = elements.pingModal;
         if (!modal) return;
@@ -1381,9 +1974,6 @@
         modal.classList.add('active');
     }
 
-    /**
-     * Start ping test
-     */
     function startPing() {
         const sourceId = parseInt(elements.pingSource?.value);
         const destId = parseInt(elements.pingDestination?.value);
@@ -1477,9 +2067,29 @@
     // TERMINAL / CLI
     // ============================================
 
-    /**
-     * Execute a CLI command
-     */
+    function toggleTerminalFullscreen() {
+        const terminal = elements.terminal;
+        const btn = elements.terminalFullscreenBtn;
+        
+        if (!terminal || !btn) return;
+        
+        state.terminalFullscreen = !state.terminalFullscreen;
+        
+        if (state.terminalFullscreen) {
+            terminal.classList.add('fullscreen');
+            btn.innerHTML = '<i class="ri-close-fill"></i>';
+            btn.title = 'Exit Fullscreen';
+        } else {
+            terminal.classList.remove('fullscreen');
+            btn.innerHTML = '<i class="ri-fullscreen-fill"></i>';
+            btn.title = 'Toggle Fullscreen';
+        }
+        
+        if (elements.terminalInput) {
+            elements.terminalInput.focus();
+        }
+    }
+
     function executeCommand(command) {
         const cmd = command.toLowerCase().trim();
 
@@ -1491,7 +2101,6 @@
 
         addTerminalLine(command, 'command');
 
-        // Command routing
         const commands = {
             'help': cmdHelp,
             '?': cmdHelp,
@@ -1511,6 +2120,8 @@
             'show inventory': cmdShowInventory,
             'show ip protocols': cmdShowIpProtocols,
             'show spanning-tree': cmdShowSpanningTree,
+            'show topology': cmdShowTopology,
+            'show connections': cmdShowConnections,
             'clear': cmdClear,
             'cls': cmdClear
         };
@@ -1525,7 +2136,11 @@
             addTerminalLine('Enter configuration commands. End with CNTL/Z.', 'info');
             addTerminalLine(`${state.selectedDevice?.name || 'Router'}(config)#`, 'info');
         } else if (cmd === 'exit' || cmd === 'end' || cmd === 'quit') {
-            addTerminalLine(`${state.selectedDevice?.name || 'Router'}#`, 'info');
+            if (state.terminalFullscreen) {
+                toggleTerminalFullscreen();
+            } else {
+                addTerminalLine(`${state.selectedDevice?.name || 'Router'}#`, 'info');
+            }
         } else if (cmd === 'enable' || cmd === 'en') {
             addTerminalLine(`${state.selectedDevice?.name || 'Router'}#`, 'info');
         } else if (cmd === 'disable') {
@@ -1536,30 +2151,33 @@
         }
     }
 
-    // CLI Command Implementations
     function cmdHelp() {
         const helpText = [
-            ['help, ?', 'Show help'],
+            ['help, ?', 'Show this help'],
             ['show ip route', 'Display routing table'],
-            ['show interfaces', 'Display interfaces'],
+            ['show interfaces', 'Display interface details'],
             ['show ip int brief', 'Brief interface summary'],
             ['show arp', 'Display ARP table'],
             ['show vlan brief', 'Display VLANs'],
-            ['show run', 'Display configuration'],
+            ['show run', 'Display running config'],
             ['show mac address-table', 'Display MAC table'],
             ['show cdp neighbors', 'Display CDP neighbors'],
-            ['show version', 'Display version'],
+            ['show version', 'Display version info'],
+            ['show topology', 'Display network topology'],
+            ['show connections', 'Display all connections'],
             ['ping <ip>', 'Ping IP address'],
-            ['traceroute <ip>', 'Trace route'],
-            ['clear', 'Clear terminal']
+            ['traceroute <ip>', 'Trace route to IP'],
+            ['clear', 'Clear terminal'],
+            ['exit', 'Exit fullscreen / mode']
         ];
 
         addTerminalLine('', 'output');
-        addTerminalLine('Available commands:', 'info');
-        addTerminalLine('─'.repeat(50), 'output');
+        addTerminalLine('Available Commands:', 'info');
+        addTerminalLine('═'.repeat(52), 'output');
         helpText.forEach(([cmd, desc]) => {
-            addTerminalLine(`  ${cmd.padEnd(22)} ${desc}`, 'output');
+            addTerminalLine(`  ${cmd.padEnd(26)} ${desc}`, 'output');
         });
+        addTerminalLine('═'.repeat(52), 'output');
     }
 
     function cmdShowIpRoute() {
@@ -1569,7 +2187,7 @@
         }
 
         if (!state.selectedDevice.canRoute) {
-            addTerminalLine('% IP routing not enabled', 'error');
+            addTerminalLine('% IP routing not enabled on this device', 'error');
             return;
         }
 
@@ -1641,7 +2259,7 @@
     function cmdShowVlan() {
         addTerminalLine('', 'output');
         addTerminalLine('VLAN Name                 Status    Ports', 'info');
-        addTerminalLine('---- -------------------- --------- ------------------', 'info');
+        addTerminalLine('──── ──────────────────── ───────── ──────────────────', 'info');
 
         state.vlans.forEach(v => {
             addTerminalLine(
@@ -1660,6 +2278,8 @@
         addTerminalLine('Building configuration...', 'info');
         addTerminalLine('', 'output');
         addTerminalLine('!', 'output');
+        addTerminalLine('version 15.1', 'output');
+        addTerminalLine('!', 'output');
         addTerminalLine(`hostname ${state.selectedDevice.name}`, 'output');
         addTerminalLine('!', 'output');
 
@@ -1677,7 +2297,7 @@
 
     function cmdShowMacTable() {
         addTerminalLine('Mac Address Table', 'info');
-        addTerminalLine('-------------------------------------------', 'info');
+        addTerminalLine('───────────────────────────────────────────', 'info');
         addTerminalLine('Vlan    Mac Address       Type        Ports', 'info');
 
         state.devices.filter(d => d.mac).slice(0, 10).forEach((d, i) => {
@@ -1712,15 +2332,19 @@
     }
 
     function cmdShowVersion() {
-        addTerminalLine('Cisco IOS Software, Version 15.1(4)M4', 'info');
+        addTerminalLine('Connixis Network Simulator, Version 3.0.0', 'info');
+        addTerminalLine('Technical Support: https://connixis.io', 'output');
         addTerminalLine('', 'output');
-        addTerminalLine(`${state.selectedDevice?.name || 'Router'} uptime is ${Math.floor(Math.random() * 30)} days`, 'output');
-        addTerminalLine('System image file is "flash:c2900-universalk9-mz.SPA.151-4.M4.bin"', 'output');
+        addTerminalLine(`System uptime: ${Math.floor(Math.random() * 30)} days, ${Math.floor(Math.random() * 24)} hours`, 'output');
+        addTerminalLine(`Total devices: ${state.devices.length}`, 'output');
+        addTerminalLine(`Total connections: ${state.connections.length}`, 'output');
+        addTerminalLine('', 'output');
+        addTerminalLine('Configuration register is 0x2102', 'output');
     }
 
     function cmdShowInventory() {
-        addTerminalLine('NAME: "Chassis", DESCR: "Cisco Router"', 'info');
-        addTerminalLine('PID: CISCO2911/K9, VID: V01, SN: FTX1234ABCD', 'output');
+        addTerminalLine('NAME: "Chassis", DESCR: "Connixis Virtual Router"', 'info');
+        addTerminalLine('PID: CONNIXIS-3000, VID: V01, SN: CNX' + Date.now().toString(36).toUpperCase(), 'output');
     }
 
     function cmdShowIpProtocols() {
@@ -1731,6 +2355,8 @@
 
         addTerminalLine('Routing Protocol is "static"', 'output');
         addTerminalLine('  Maximum path: 4', 'output');
+        addTerminalLine('  Routing for Networks:', 'output');
+        addTerminalLine('    (default)', 'output');
     }
 
     function cmdShowSpanningTree() {
@@ -1740,6 +2366,41 @@
             addTerminalLine(`  Root ID    Priority    ${32768 + v.id}`, 'output');
             addTerminalLine('  This bridge is the root', 'output');
             addTerminalLine('', 'output');
+        });
+    }
+
+    function cmdShowTopology() {
+        addTerminalLine('', 'output');
+        addTerminalLine('Network Topology Summary', 'info');
+        addTerminalLine('═'.repeat(50), 'output');
+        addTerminalLine(`Total Devices: ${state.devices.length}`, 'output');
+        addTerminalLine(`Total Connections: ${state.connections.length}`, 'output');
+        addTerminalLine('', 'output');
+        
+        addTerminalLine('Devices:', 'info');
+        addTerminalLine('─'.repeat(50), 'output');
+        state.devices.forEach(d => {
+            const typeConfig = deviceTypes[d.type];
+            addTerminalLine(`  ${d.name.padEnd(22)} ${(d.ip || 'N/A').padEnd(16)} ${typeConfig?.category || d.type}`, 'output');
+        });
+    }
+
+    function cmdShowConnections() {
+        addTerminalLine('', 'output');
+        addTerminalLine('Active Connections', 'info');
+        addTerminalLine('═'.repeat(55), 'output');
+        
+        if (state.connections.length === 0) {
+            addTerminalLine('No active connections', 'warning');
+            return;
+        }
+        
+        state.connections.forEach(conn => {
+            const d1 = state.devices.find(d => d.id === conn.device1);
+            const d2 = state.devices.find(d => d.id === conn.device2);
+            if (d1 && d2) {
+                addTerminalLine(`  ${d1.name}:${conn.port1} ←──[${conn.type}]──→ ${d2.name}:${conn.port2}`, 'output');
+            }
         });
     }
 
@@ -1784,7 +2445,7 @@
 
         for (let i = 1; i <= 3; i++) {
             const time = Math.floor(Math.random() * 20) + 1;
-            addTerminalLine(`  ${i}   10.0.${i}.1  ${time}ms  ${time + 2}ms`, 'output');
+            addTerminalLine(`  ${i}   10.0.${i}.1  ${time}ms  ${time + 2}ms  ${time + 1}ms`, 'output');
         }
     }
 
@@ -1794,9 +2455,6 @@
         }
     }
 
-    /**
-     * Add a line to the terminal output
-     */
     function addTerminalLine(text, type = 'output') {
         const terminal = elements.terminalOutput;
         if (!terminal) return;
@@ -1812,9 +2470,6 @@
     // SUBNET CALCULATOR
     // ============================================
 
-    /**
-     * Calculate subnet information
-     */
     function calculateSubnet() {
         const ip = elements.subnetIP?.value?.trim();
         let cidr = elements.subnetCIDR?.value?.trim();
@@ -1824,7 +2479,6 @@
             return;
         }
 
-        // Parse CIDR
         let prefix;
         if (cidr.startsWith('/')) {
             prefix = parseInt(cidr.substring(1));
@@ -1842,14 +2496,12 @@
             return;
         }
 
-        // Parse IP
         const ipParts = ip.split('.').map(Number);
         if (ipParts.length !== 4 || ipParts.some(p => isNaN(p) || p < 0 || p > 255)) {
             showToast('Invalid IP address format', 'error');
             return;
         }
 
-        // Calculate
         const ipNum = (ipParts[0] << 24) + (ipParts[1] << 16) + (ipParts[2] << 8) + ipParts[3];
         const mask = prefix === 0 ? 0 : (-1 << (32 - prefix)) >>> 0;
         const network = (ipNum & mask) >>> 0;
@@ -1911,7 +2563,7 @@
             `;
         }
 
-        showToast('Subnet calculated', 'success');
+        showToast('Subnet calculated successfully', 'success');
     }
 
     // ============================================
@@ -1946,7 +2598,6 @@
     function openDeviceConsole(device) {
         state.selectedDevice = device;
 
-        // Switch to CLI tab
         document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.panel-section').forEach(s => s.classList.remove('active'));
 
@@ -1959,126 +2610,50 @@
         addTerminalLine('', 'output');
         addTerminalLine(`Connected to ${device.name}`, 'info');
         addTerminalLine(`${device.name}>`, 'output');
+        
+        if (elements.terminalInput) {
+            elements.terminalInput.focus();
+        }
     }
 
     // ============================================
-    // SAVE / LOAD TOPOLOGY
+    // CLEAR CANVAS
     // ============================================
 
-    function saveTopology() {
-        const topology = {
-            devices: state.devices,
-            connections: state.connections,
-            vlans: state.vlans,
-            aclRules: state.aclRules,
-            version: '3.0',
-            savedAt: new Date().toISOString(),
-            name: 'Connixis Topology'
-        };
-
-        const blob = new Blob([JSON.stringify(topology, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `connixis-topology-${Date.now()}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-
-        showToast('Topology saved', 'success');
-    }
-
-    function loadTopology() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = '.json';
-
-        input.onchange = (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                try {
-                    const topology = JSON.parse(event.target.result);
-
-                    // Clear existing
-                    clearCanvas(false);
-
-                    // Load devices
-                    topology.devices.forEach(d => {
-                        state.devices.push(d);
-                        const el = createDeviceElement(d);
-                        if (el && elements.canvasContainer) {
-                            elements.canvasContainer.appendChild(el);
-                        }
-                    });
-
-                    // Load connections
-                    topology.connections.forEach(c => {
-                        state.connections.push(c);
-                        drawConnection(c);
-
-                        // Update port indicators
-                        const port1El = document.querySelector(
-                            `#device-${c.device1} .port-indicator[data-port="${c.port1}"]`
-                        );
-                        const port2El = document.querySelector(
-                            `#device-${c.device2} .port-indicator[data-port="${c.port2}"]`
-                        );
-                        if (port1El) port1El.classList.add('connected');
-                        if (port2El) port2El.classList.add('connected');
-                    });
-
-                    // Load other data
-                    if (topology.vlans) state.vlans = topology.vlans;
-                    if (topology.aclRules) state.aclRules = topology.aclRules;
-
-                    // Update counters
-                    state.deviceIdCounter = Math.max(...state.devices.map(d => d.id), 0) + 1;
-                    state.connectionIdCounter = Math.max(...state.connections.map(c => c.id), 0) + 1;
-
-                    updateStats();
-                    showToast('Topology loaded', 'success');
-
-                } catch (err) {
-                    showToast('Failed to load: ' + err.message, 'error');
-                }
-            };
-            reader.readAsText(file);
-        };
-
-        input.click();
-    }
-
-    function clearCanvas(confirm_clear = true) {
-        if (confirm_clear && !confirm('Clear all devices and connections?')) {
+    function clearCanvas(confirmClear = true) {
+        if (confirmClear && !confirm('Clear all devices and connections?')) {
             return;
         }
 
-        // Clear state
         state.devices = [];
         state.connections = [];
         state.selectedDevice = null;
         state.deviceIdCounter = 0;
         state.connectionIdCounter = 0;
 
-        // Clear DOM
-        if (elements.canvasContainer) {
-            elements.canvasContainer.querySelectorAll('.network-device').forEach(el => el.remove());
-        }
-        if (elements.networkCanvas) {
-            elements.networkCanvas.innerHTML = '';
+        const wrapper = elements.zoomWrapper;
+        if (wrapper) {
+            wrapper.querySelectorAll('.network-device').forEach(el => el.remove());
+            wrapper.querySelectorAll('.packet').forEach(el => el.remove());
         }
 
-        // Reset UI
+        if (elements.networkCanvas) {
+            const defs = elements.networkCanvas.querySelector('defs');
+            elements.networkCanvas.innerHTML = '';
+            if (defs) {
+                elements.networkCanvas.appendChild(defs);
+            }
+        }
+
         if (elements.deviceConfigGroup) elements.deviceConfigGroup.style.display = 'none';
         if (elements.interfaceConfig) elements.interfaceConfig.style.display = 'none';
         if (elements.emptyState) elements.emptyState.style.display = 'block';
 
         updateStats();
 
-        if (confirm_clear) {
+        if (confirmClear) {
             showToast('Canvas cleared', 'success');
+            addTerminalLine('%SYS-5-RELOAD: All devices removed', 'warning');
         }
     }
 
@@ -2130,19 +2705,24 @@
                 openPingModal(device);
                 break;
             case 'traceroute':
-                if (state.selectedDevice) {
-                    executeCommand(`traceroute ${device.ip}`);
-                }
+                state.selectedDevice = device;
+                executeCommand(`traceroute ${device.ip}`);
+                break;
+            case 'capture':
+                showToast(`Packet capture started on ${device.name}`, 'info');
+                addTerminalLine(`%CAPTURE-5-START: Capturing packets on ${device.name}`, 'info');
                 break;
             case 'enable':
                 device.status = 'online';
                 updateDeviceElement(device);
                 showToast(`${device.name} enabled`, 'success');
+                addTerminalLine(`%LINK-5-CHANGED: ${device.name} state changed to up`, 'success');
                 break;
             case 'disable':
                 device.status = 'offline';
                 updateDeviceElement(device);
                 showToast(`${device.name} disabled`, 'warning');
+                addTerminalLine(`%LINK-5-CHANGED: ${device.name} state changed to down`, 'warning');
                 break;
             case 'duplicate':
                 duplicateDevice(device);
@@ -2210,6 +2790,22 @@
             });
         }
 
+        // Terminal fullscreen button
+        if (elements.terminalFullscreenBtn) {
+            elements.terminalFullscreenBtn.addEventListener('click', toggleTerminalFullscreen);
+        }
+
+        // Fullscreen button
+        if (elements.fullscreenBtn) {
+            elements.fullscreenBtn.addEventListener('click', toggleFullscreen);
+        }
+
+        // Fullscreen change events
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
         // Toolbar buttons
         document.getElementById('selectTool')?.addEventListener('click', () => {
             state.connectionMode = false;
@@ -2231,24 +2827,21 @@
         document.getElementById('pingTool')?.addEventListener('click', () => openPingModal());
         document.getElementById('subnetCalc')?.addEventListener('click', () => openModal('subnetModal'));
         document.getElementById('clearAll')?.addEventListener('click', () => clearCanvas());
-        document.getElementById('saveTopology')?.addEventListener('click', saveTopology);
-        document.getElementById('loadTopology')?.addEventListener('click', loadTopology);
 
-        // Zoom controls
-        document.getElementById('zoomIn')?.addEventListener('click', () => {
-            state.zoomLevel = Math.min(state.zoomLevel + 0.1, 2);
-            applyZoom();
-        });
+        // Save button - opens modal
+        if (elements.saveBtn) {
+            elements.saveBtn.addEventListener('click', openSaveModal);
+        }
 
-        document.getElementById('zoomOut')?.addEventListener('click', () => {
-            state.zoomLevel = Math.max(state.zoomLevel - 0.1, 0.5);
-            applyZoom();
-        });
+        // Load button
+        if (elements.loadBtn) {
+            elements.loadBtn.addEventListener('click', loadTopologyFile);
+        }
 
-        document.getElementById('fitView')?.addEventListener('click', () => {
-            state.zoomLevel = 1;
-            applyZoom();
-        });
+        // Zoom controls - FIXED
+        document.getElementById('zoomIn')?.addEventListener('click', zoomIn);
+        document.getElementById('zoomOut')?.addEventListener('click', zoomOut);
+        document.getElementById('fitView')?.addEventListener('click', fitView);
 
         // Run simulation button
         document.getElementById('runSimulation')?.addEventListener('click', () => {
@@ -2288,7 +2881,8 @@
         // Canvas click to deselect
         elements.canvasContainer?.addEventListener('click', (e) => {
             if (e.target === elements.canvasContainer || 
-                e.target.classList.contains('canvas-grid')) {
+                e.target.classList.contains('canvas-grid') ||
+                e.target.id === 'zoomWrapper') {
                 
                 if (state.selectedDevice) {
                     const el = document.getElementById(`device-${state.selectedDevice.id}`);
@@ -2300,10 +2894,12 @@
                     if (elements.emptyState) elements.emptyState.style.display = 'block';
                 }
 
-                // Deselect connections
-                document.querySelectorAll('.cable-path').forEach(p => {
-                    p.style.strokeWidth = '';
-                    p.style.filter = '';
+                document.querySelectorAll('#networkCanvas > g').forEach(g => {
+                    const path = g.querySelector('.cable-path');
+                    if (path) {
+                        path.style.strokeWidth = '';
+                        path.style.filter = '';
+                    }
                 });
                 state.selectedConnection = null;
             }
@@ -2333,18 +2929,47 @@
                 const type = e.dataTransfer.getData('deviceType');
                 if (type) {
                     const rect = elements.canvasContainer.getBoundingClientRect();
-                    const x = Math.max(0, e.clientX - rect.left - 45);
-                    const y = Math.max(0, e.clientY - rect.top - 60);
+                    let x = (e.clientX - rect.left) / state.zoomLevel - 50;
+                    let y = (e.clientY - rect.top) / state.zoomLevel - 60;
+                    x = Math.max(0, x);
+                    y = Math.max(0, y);
                     addDevice(type, x, y);
                 }
             });
+
+            // Mouse wheel zoom
+            elements.canvasContainer.addEventListener('wheel', (e) => {
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomIn();
+                    } else {
+                        zoomOut();
+                    }
+                }
+            }, { passive: false });
         }
 
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
+            if (document.activeElement.tagName === 'INPUT' || 
+                document.activeElement.tagName === 'TEXTAREA' ||
+                document.activeElement.tagName === 'SELECT') {
+                
+                if (e.key === 'Escape' && state.terminalFullscreen) {
+                    toggleTerminalFullscreen();
+                }
+                return;
+            }
+
+            // F11 for fullscreen
+            if (e.key === 'F11') {
+                e.preventDefault();
+                toggleFullscreen();
+            }
+
             // Delete selected device
-            if (e.key === 'Delete' && state.selectedDevice && 
-                document.activeElement.tagName !== 'INPUT') {
+            if (e.key === 'Delete' && state.selectedDevice) {
                 if (confirm(`Delete ${state.selectedDevice.name}?`)) {
                     deleteDevice(state.selectedDevice);
                 }
@@ -2352,7 +2977,9 @@
 
             // Escape to cancel
             if (e.key === 'Escape') {
-                if (state.connectionMode) {
+                if (state.terminalFullscreen) {
+                    toggleTerminalFullscreen();
+                } else if (state.connectionMode) {
                     document.querySelectorAll('.port-indicator.connecting').forEach(p => {
                         p.classList.remove('connecting');
                     });
@@ -2364,18 +2991,42 @@
                 hideContextMenu();
                 closeModal('subnetModal');
                 closeModal('pingModal');
+                closeModal('saveModal');
             }
 
             // Ctrl+S to save
             if (e.ctrlKey && e.key === 's') {
                 e.preventDefault();
-                saveTopology();
+                openSaveModal();
             }
 
             // Ctrl+O to load
             if (e.ctrlKey && e.key === 'o') {
                 e.preventDefault();
-                loadTopology();
+                loadTopologyFile();
+            }
+
+            // V for select tool
+            if (e.key === 'v' || e.key === 'V') {
+                document.getElementById('selectTool')?.click();
+            }
+
+            // C for connect tool
+            if (e.key === 'c' || e.key === 'C') {
+                document.getElementById('connectTool')?.click();
+            }
+
+            // + and - for zoom
+            if (e.key === '+' || e.key === '=') {
+                zoomIn();
+            }
+            if (e.key === '-' || e.key === '_') {
+                zoomOut();
+            }
+
+            // 0 to reset zoom
+            if (e.key === '0') {
+                resetZoom();
             }
         });
 
@@ -2417,6 +3068,11 @@
             });
         }
 
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            updateConnections();
+        });
+
         // Update time every second
         setInterval(updateTime, 1000);
     }
@@ -2426,26 +3082,25 @@
     // ============================================
 
     function init() {
-        // Cache DOM elements
         cacheElements();
-
-        // Setup event listeners
         setupEventListeners();
-
-        // Initial UI state
         updateStats();
         updateTime();
+        applyZoom();
 
-        // Welcome message
-        addTerminalLine('╔════════════════════════════════════╗', 'info');
-        addTerminalLine('║   Connixis CLI v3.0                ║', 'info');
-        addTerminalLine('║   Network Engineering Simulator    ║', 'info');
-        addTerminalLine('╚════════════════════════════════════╝', 'info');
+        addTerminalLine('╔══════════════════════════════════════════════════╗', 'info');
+        addTerminalLine('║                                                  ║', 'info');
+        addTerminalLine('║      CONNIXIS NETWORK SIMULATOR v3.0            ║', 'info');
+        addTerminalLine('║      Advanced Network Engineering Platform       ║', 'info');
+        addTerminalLine('║                                                  ║', 'info');
+        addTerminalLine('╚══════════════════════════════════════════════════╝', 'info');
         addTerminalLine('', 'output');
-        addTerminalLine("Type 'help' for available commands", 'output');
+        addTerminalLine('System initialized successfully.', 'success');
+        addTerminalLine("Type 'help' for available commands.", 'output');
         addTerminalLine('', 'output');
 
-        console.log('Connixis Network Simulator initialized');
+        console.log('%cConnixis Network Simulator v3.0', 'color: #3b82f6; font-size: 18px; font-weight: bold;');
+        console.log('%cInitialized successfully', 'color: #10b981; font-size: 12px;');
     }
 
     // ============================================
@@ -2458,6 +3113,8 @@
     window.openModal = openModal;
     window.calculateSubnet = calculateSubnet;
     window.startPing = startPing;
+    window.selectSaveFormat = selectSaveFormat;
+    window.confirmSave = confirmSave;
 
     // Initialize on DOM ready
     if (document.readyState === 'loading') {
